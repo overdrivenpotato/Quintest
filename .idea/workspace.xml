@@ -2,16 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="893b3d7b-ced6-4860-8f0e-286616078fc0" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/game.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/Level2.tmx" afterPath="$PROJECT_DIR$/data/Level2.tmx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/level1.tmx" afterPath="$PROJECT_DIR$/data/level1.tmx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quintus.js" afterPath="$PROJECT_DIR$/lib/quintus.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quintus_sprites.js" afterPath="$PROJECT_DIR$/lib/quintus_sprites.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/level3.tmx" afterPath="$PROJECT_DIR$/data/level3.tmx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Quintest.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384649076911" ignored="false" />
-    <file path="/index.html" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384648883273" ignored="false" />
+    <file path="/Dummy.txt" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384649093689" ignored="false" />
+    <file path="/index.html" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384649251143" ignored="false" />
+    <file path="/level3.tmx" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384649155524" ignored="false" />
+    <file path="/game.js" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384649234456" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,19 +34,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="12" selection-start="1481" selection-end="1481" vertical-scroll-proportion="-8.88">
+            <state line="15" column="30" selection-start="634" selection-end="634" vertical-scroll-proportion="0.55427253">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quintus.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="game.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/game.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="27" selection-start="815" selection-end="815" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#0#158#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="quintus.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/quintus.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="113" column="17" selection-start="4689" selection-end="4689" vertical-scroll-proportion="0.33258426">
+            <state line="106" column="0" selection-start="4494" selection-end="4494" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -51,10 +65,46 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Level2.tmx" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/Level2.tmx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="20" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="level3.tmx" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/level3.tmx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="27" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="level1.tmx" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/level1.tmx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="11" selection-start="290" selection-end="290" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="levelorig.tmx" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/levelorig.tmx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="18" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="quintus_sprites.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/quintus_sprites.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="19" selection-start="1937" selection-end="1937" vertical-scroll-proportion="0.0">
+            <state line="68" column="0" selection-start="1937" selection-end="1937" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -80,9 +130,14 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/lib/quintus.js" />
         <option value="$PROJECT_DIR$/lib/quintus_sprites.js" />
+        <option value="$PROJECT_DIR$/data/Level2.tmx" />
+        <option value="$PROJECT_DIR$/data/level3.tmx" />
+        <option value="$PROJECT_DIR$/data/level1.tmx" />
+        <option value="$PROJECT_DIR$/games.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/game.js" />
       </list>
     </option>
   </component>
@@ -147,7 +202,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -200,6 +255,11 @@
       <created>1384645654781</created>
       <updated>1384645654781</updated>
     </task>
+    <task id="LOCAL-00001" summary="Changed levels, fixed some stuff, and auto indented the library">
+      <created>1384649100022</created>
+      <updated>1384649100022</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -289,28 +349,65 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/quintus_sprites.js">
+    <entry file="file://$PROJECT_DIR$/data/Level2.tmx">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="19" selection-start="1937" selection-end="1937" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state line="3" column="20" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/data/level3.tmx">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="12" selection-start="1481" selection-end="1481" vertical-scroll-proportion="-8.88">
+        <state line="3" column="27" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/level1.tmx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="11" selection-start="290" selection-end="290" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/levelorig.tmx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="18" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/quintus.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="17" selection-start="4689" selection-end="4689" vertical-scroll-proportion="0.33258426">
+        <state line="106" column="0" selection-start="4494" selection-end="4494" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/quintus_sprites.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="0" selection-start="1937" selection-end="1937" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="27" selection-start="815" selection-end="815" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#158#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="30" selection-start="634" selection-end="634" vertical-scroll-proportion="0.55427253">
+          <folding />
         </state>
       </provider>
     </entry>
