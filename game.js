@@ -19,7 +19,6 @@ var level = "level4.tmx";
 
 Q.Sprite.extend("Player",{
     init: function(p) {
-        new Q.TileLayer({ dataAsset: level, layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE }).blocks[0].;
         this._super(p, { asset: "player.png", x: 110, y: 50, jumpSpeed: -580});
         this.add('2d, platformerControls');
     },
@@ -32,8 +31,8 @@ Q.Sprite.extend("Player",{
         }
         if(this.p.x < this.stage.minX)
             this.p.x = this.stage.minX;
-        console.log(this.p.x);
-        console.log(this.stage(1).minX);
+//        console.log(this.p.x);
+//        console.log(this.stage.minX);
     }
 });
 
@@ -79,4 +78,5 @@ Q.scene("level2", function(stage) {
 Q.load("tiles_map.png, player.png, enemy.png, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
     Q.stageScene("level2");
+//    console.log(new Q.TileLayer({ dataAsset: level, layerIndex: 2, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE }).blocks[0]);
 });
