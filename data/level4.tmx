@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="tiles_map" tilewidth="70" tileheight="70">
   <image source="../../../../../../../Applications/MAMP/htdocs/images/tiles_map.png" trans="000000" width="700" height="140"/>
  </tileset>
- <layer name="Tile Layer 1" width="15" height="30">
+ <layer name="background" width="15" height="30">
   <data>
    <tile gid="10"/>
    <tile gid="10"/>
