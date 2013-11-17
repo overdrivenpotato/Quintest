@@ -10,6 +10,7 @@ var Q = Quintus()
     .setup({
         width: 960,
         height: 640
+//        maximize: true
     }).controls().touch();
 //load assets
 
@@ -57,15 +58,15 @@ Q.Sprite.extend("Enemy",{
 });
 
 Q.scene("level2",function(stage) {
-    var background = new Q.TileLayer({ dataAsset: 'level4.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
+    var background = new Q.TileLayer({ dataAsset: 'level2.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
     stage.insert(background);
-    stage.collisionLayer(new Q.TileLayer({ dataAsset: 'level4.tmx', layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));
+    stage.collisionLayer(new Q.TileLayer({ dataAsset: 'level2.tmx', layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));
     var player = stage.insert(new Q.Player());
     var enemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
     stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
 });
 
-Q.load("tiles_map.png, player.png, enemy.png, level4.tmx", function() {
+Q.load("tiles_map.png, player.png, enemy.png, level2.tmx", function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
     Q.stageScene("level2");
 });
