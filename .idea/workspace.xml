@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="893b3d7b-ced6-4860-8f0e-286616078fc0" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\Programming\Javascript\Cavemen Joint Link\Quintest\data\Level2.tmx" afterPath="$PROJECT_DIR$/data/level2.tmx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.js" afterPath="$PROJECT_DIR$/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/level3.tmx" afterPath="$PROJECT_DIR$/data/level3.tmx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/level4.tmx" afterPath="$PROJECT_DIR$/data/level4.tmx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Quintest.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384651449878" ignored="false" />
+    <file path="/Dummy.txt" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384651481722" ignored="false" />
     <file path="/index.html" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384649251143" ignored="false" />
     <file path="/level3.tmx" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384649155524" ignored="false" />
     <file path="/game.js" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384651347634" ignored="false" />
@@ -41,10 +40,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="game.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="0" selection-start="1369" selection-end="1369" vertical-scroll-proportion="0.0">
+            <state line="59" column="57" selection-start="1669" selection-end="1669" vertical-scroll-proportion="0.61870503">
               <folding>
                 <element signature="e#0#158#0" expanded="false" />
               </folding>
@@ -52,10 +51,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="level2.tmx" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="level2.tmx" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/level2.tmx">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="3" column="29" selection-start="239" selection-end="239" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="level3.tmx" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/level3.tmx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="36" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="level4.tmx" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/level4.tmx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="20" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -87,6 +104,7 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/data/level2.tmx" />
         <option value="$PROJECT_DIR$/data/level3.tmx" />
+        <option value="$PROJECT_DIR$/data/level4.tmx" />
         <option value="$PROJECT_DIR$/game.js" />
       </list>
     </option>
@@ -217,17 +235,22 @@
       <created>1384650968777</created>
       <updated>1384650968777</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Changed &quot;Level2.tmx&quot; to &quot;level2.tmx&quot;">
+      <created>1384651496401</created>
+      <updated>1384651496401</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24984147" sideWeight="0.67128986" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24984147" sideWeight="0.67128986" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -237,7 +260,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32871014" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -285,7 +307,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Enemy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed &quot;Level2.tmx&quot; to &quot;level2.tmx&quot;" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -302,6 +324,7 @@
     <MESSAGE value="Changed levels, fixed some stuff, and auto indented the library" />
     <MESSAGE value="Moved some files around, game is now in game.js" />
     <MESSAGE value="Added Enemy" />
+    <MESSAGE value="Changed &quot;Level2.tmx&quot; to &quot;level2.tmx&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -364,26 +387,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/level3.tmx">
+    <entry file="file://$PROJECT_DIR$/data/level4.tmx">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="20" selection-start="230" selection-end="230" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game.js">
+    <entry file="file://$PROJECT_DIR$/data/level2.tmx">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="0" selection-start="1369" selection-end="1369" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#158#0" expanded="false" />
-          </folding>
+        <state line="3" column="29" selection-start="239" selection-end="239" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/level2.tmx">
+    <entry file="file://$PROJECT_DIR$/data/level3.tmx">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="2" column="36" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="57" selection-start="1669" selection-end="1669" vertical-scroll-proportion="0.61870503">
+          <folding>
+            <element signature="e#0#158#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
