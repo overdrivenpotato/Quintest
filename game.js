@@ -9,7 +9,7 @@
 var stageMaxX;
 var stageMaxY;
 
-var Q = Quintus()
+var Q = Quintus({development: true})
     .include("Sprites, Scenes, Input, 2D, Touch, UI")
     .setup({
         width: 960,
@@ -80,8 +80,6 @@ Q.Sprite.extend("Pipe",{
         this._super(p, { asset: 'pipe.png', x: 3045, y: 280}) ;
         this.add('2d');
         this.on("bump.top", function(collision) {
-            console.log(Q.inputs['down']);
-            console.log(collision.obj.isA("Player"));
             if(collision.obj.isA("Player") && Q.inputs['down']) {
                 Q.clearStages();
                 Q.stageScene("level2");
@@ -99,10 +97,12 @@ Q.scene("level2", function(stage) {
     var pipe = stage.insert(new Q.Pipe());
     stageMaxX = background.p.w;
     stageMaxY = background.p.h;
-    stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
+    stage.insert(new Q.Repeater({ asset: "background-wall.png", speedX: 0.5, speedY: 0.5 }));
+    stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w / 2, minY: 0, maxY: background.p.h / 2});
+    stage.viewport.scale = 0.5;
 });
 
-Q.load("tiles_map.png, player.png, enemy.png, pipe.png, " + level, function() {
+Q.load("tiles_map.png, player.png, enemy.png, pipe.png, background-wall.png, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
     Q.stageScene("level2");
 //    console.log(new Q.TileLayer({ dataAsset: level, layerIndex: 2, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE }).blocks[0]);
