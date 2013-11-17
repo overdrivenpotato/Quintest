@@ -28,6 +28,8 @@ Q.Sprite.extend("Player",{
         }
         if(this.p.x < this.stage.minX)
             this.p.x = this.stage.minX;
+        console.log(this.p.x);
+        console.log(this.stage.minX);
     }
 });
 
