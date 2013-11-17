@@ -20,7 +20,7 @@ var Q = Quintus()
     }).controls().touch();
 //load assets
 
-var level = "level5.tmx";
+var level = "level3.tmx";
 
 
 Q.Sprite.extend("Player",{
