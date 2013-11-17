@@ -5,6 +5,10 @@
  * Time: 7:46 PM
  * To change this template use File | Settings | File Templates.
  */
+
+var stageMaxX;
+var stageMaxY;
+
 var Q = Quintus()
     .include("Sprites, Scenes, Input, 2D, Touch, UI")
     .setup({
@@ -14,7 +18,7 @@ var Q = Quintus()
     }).controls().touch();
 //load assets
 
-var level = "level4.tmx";
+var level = "level5.tmx";
 
 
 Q.Sprite.extend("Player",{
@@ -29,14 +33,21 @@ Q.Sprite.extend("Player",{
         if(Q.inputs['right']  && this.p.direction == 'left') {
             this.p.flip = false;
         }
-        if(this.p.x < this.stage.minX)
-            this.p.x = this.stage.minX;
-//        console.log(this.p.x);
-//        console.log(this.stage.minX);
+        if(this.p.x < 0)
+            this.p.x = 0;
+        if(this.p.x > stageMaxX)
+            this.p.x = stageMaxX;
+        if(this.p.y + 35 > stageMaxY)
+        {
+            Q.clearStages();
+            Q.stageScene("level2");
+        }
+//        console.log(stageMaxY);
+//        console.log(this.minX);
     }
 });
 
-Q.Sprite.extend("Enemy",{
+Q.Sprite.extend("Enmy",{
     init: function(p) {
         this._super(p, { asset: 'enemy.png', vx: 100 });
         this.add('2d, aiBounce');
@@ -60,9 +71,16 @@ Q.Sprite.extend("Enemy",{
 });
 
 Q.Sprite.extend("Pipe",{
-    init: function(p)
-    {
-        this._super(p, { asset: 'pipe.png', x: 1})
+    init: function(p){
+        this._super(p, { asset: 'pipe.png', x: 100, y: 200}) ;
+        this.on("bump.top",function(collision) {
+            console.log(Q.inputs['down']);
+            console.log(collision.obj.isA("Player"));
+            if(collision.obj.isA("Player") && Q.inputs['down']) {
+                Q.clearStages();
+                Q.stageScene("level2");
+            }
+        });
     }
 });
 
@@ -71,11 +89,14 @@ Q.scene("level2", function(stage) {
     stage.insert(background);
     stage.collisionLayer(new Q.TileLayer({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));
     var player = stage.insert(new Q.Player());
-    var enemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+    var enemy = stage.insert(new Q.Enmy({ x: 700, y: 0 }));
+    var pipe = stage.insert(new Q.Pipe());
+    stageMaxX = background.p.w;
+    stageMaxY = background.p.h;
     stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
 });
 
-Q.load("tiles_map.png, player.png, enemy.png, " + level, function() {
+Q.load("tiles_map.png, player.png, enemy.png, pipe.png, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
     Q.stageScene("level2");
 //    console.log(new Q.TileLayer({ dataAsset: level, layerIndex: 2, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE }).blocks[0]);

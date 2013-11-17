@@ -7,10 +7,10 @@
     </list>
     <ignored path="Quintest.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384659495522" ignored="false" />
+    <file path="/Dummy.txt" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384659683092" ignored="false" />
     <file path="/index.html" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384649251143" ignored="false" />
     <file path="/level3.tmx" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384649155524" ignored="false" />
-    <file path="/game.js" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384658470321" ignored="false" />
+    <file path="/game.js" changelist="893b3d7b-ced6-4860-8f0e-286616078fc0" time="1384664799814" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,16 +42,7 @@
       <file leaf-file-name="game.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="18" selection-start="369" selection-end="369" vertical-scroll-proportion="0.24454148">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Level2.tmx" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/Level2.tmx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="29" selection-start="239" selection-end="239" vertical-scroll-proportion="0.0">
+            <state line="20" column="19" selection-start="402" selection-end="402" vertical-scroll-proportion="-0.34934497">
               <folding />
             </state>
           </provider>
@@ -235,7 +226,15 @@
       <created>1384659500316</created>
       <updated>1384659500316</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="tettst">
+      <created>1384659649479</created>
+      <updated>1384659649479</updated>
+    </task>
+    <task id="LOCAL-00008" summary="level 4">
+      <created>1384659685546</created>
+      <updated>1384659685546</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -303,7 +302,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can play level4 now" />
+    <option name="LAST_COMMIT_MESSAGE" value="level 4" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -322,6 +321,8 @@
     <MESSAGE value="Added Enemy" />
     <MESSAGE value="Changed &quot;Level2.tmx&quot; to &quot;level2.tmx&quot;" />
     <MESSAGE value="Can play level4 now" />
+    <MESSAGE value="tettst" />
+    <MESSAGE value="level 4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -329,13 +330,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/Level2.tmx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="29" selection-start="239" selection-end="239" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/level3.tmx">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="36" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0">
@@ -394,13 +388,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/Level2.tmx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="29" selection-start="239" selection-end="239" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/quintus_anim.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="103" column="6" selection-start="3016" selection-end="3016" vertical-scroll-proportion="0.0">
@@ -431,6 +418,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/quintus_scenes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="317" column="8" selection-start="9249" selection-end="9249" vertical-scroll-proportion="0.33187774">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data/level3.tmx">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="36" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0">
@@ -438,9 +432,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/Level2.tmx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="23" selection-start="227" selection-end="233" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="18" selection-start="369" selection-end="369" vertical-scroll-proportion="0.24454148">
+        <state line="20" column="19" selection-start="402" selection-end="402" vertical-scroll-proportion="-0.34934497">
           <folding />
         </state>
       </provider>
