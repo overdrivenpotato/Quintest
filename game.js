@@ -14,9 +14,12 @@ var Q = Quintus()
     }).controls().touch();
 //load assets
 
+var level = "level4.tmx";
+
 
 Q.Sprite.extend("Player",{
     init: function(p) {
+        new Q.TileLayer({ dataAsset: level, layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE }).blocks[0].;
         this._super(p, { asset: "player.png", x: 110, y: 50, jumpSpeed: -580});
         this.add('2d, platformerControls');
     },
@@ -30,7 +33,7 @@ Q.Sprite.extend("Player",{
         if(this.p.x < this.stage.minX)
             this.p.x = this.stage.minX;
         console.log(this.p.x);
-        console.log(this.stage.minX);
+        console.log(this.stage(1).minX);
     }
 });
 
@@ -57,16 +60,23 @@ Q.Sprite.extend("Enemy",{
     }
 });
 
-Q.scene("level2",function(stage) {
-    var background = new Q.TileLayer({ dataAsset: 'level2.tmx', layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
+Q.Sprite.extend("Pipe",{
+    init: function(p)
+    {
+        this._super(p, { asset: 'pipe.png', x: 1})
+    }
+});
+
+Q.scene("level2", function(stage) {
+    var background = new Q.TileLayer({ dataAsset: level, layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
     stage.insert(background);
-    stage.collisionLayer(new Q.TileLayer({ dataAsset: 'level2.tmx', layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));
+    stage.collisionLayer(new Q.TileLayer({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));
     var player = stage.insert(new Q.Player());
     var enemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
     stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w, minY: 0, maxY: background.p.h});
 });
 
-Q.load("tiles_map.png, player.png, enemy.png, level2.tmx", function() {
+Q.load("tiles_map.png, player.png, enemy.png, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
     Q.stageScene("level2");
 });
