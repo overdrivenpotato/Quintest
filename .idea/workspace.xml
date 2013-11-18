@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="893b3d7b-ced6-4860-8f0e-286616078fc0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.js" afterPath="$PROJECT_DIR$/game.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/quintus_anim.js" afterPath="$PROJECT_DIR$/lib/quintus_anim.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Quintest.iws" />
@@ -33,7 +34,7 @@
       <file leaf-file-name="game.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="63" selection-start="1192" selection-end="1192" vertical-scroll-proportion="1.0525393">
+            <state line="109" column="31" selection-start="3118" selection-end="3118" vertical-scroll-proportion="1.8388791">
               <folding />
             </state>
           </provider>
@@ -331,7 +332,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="63" selection-start="1192" selection-end="1192" vertical-scroll-proportion="1.0525393">
+        <state line="109" column="31" selection-start="3118" selection-end="3118" vertical-scroll-proportion="1.8388791">
           <folding />
         </state>
       </provider>
