@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="893b3d7b-ced6-4860-8f0e-286616078fc0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.js" afterPath="$PROJECT_DIR$/game.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/level6.tmx" afterPath="$PROJECT_DIR$/data/level6.tmx" />
     </list>
     <ignored path="Quintest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +32,7 @@
       <file leaf-file-name="game.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="141" selection-start="158" selection-end="158" vertical-scroll-proportion="0.11111111">
+            <state line="94" column="95" selection-start="2667" selection-end="2667" vertical-scroll-proportion="0.083333336">
               <folding />
             </state>
           </provider>
@@ -500,7 +499,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="141" selection-start="158" selection-end="158" vertical-scroll-proportion="0.11111111">
+        <state line="94" column="95" selection-start="2667" selection-end="2667" vertical-scroll-proportion="0.083333336">
           <folding />
         </state>
       </provider>

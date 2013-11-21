@@ -107,7 +107,7 @@ Q.scene("level2", function(stage) {
     stage.collisionLayer(new Q.TileLayer({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));
     var player = stage.insert(new Q.Player());
     var enemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
-    var pipe = stage.insert(new Q.Pipe());
+//    var pipe = stage.insert(new Q.Pipe());
     stageMaxX = background.p.w;
     stageMaxY = background.p.h;
     stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w / 2, minY: 0, maxY: background.p.h / 2});
