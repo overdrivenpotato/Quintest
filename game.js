@@ -8,32 +8,109 @@
 
 var stageMaxX;
 var stageMaxY;
+var screenX = 960;
+var screenY = 640;
 
-var Q = Quintus({development: true})
-    .include("Sprites, Scenes, Input, 2D, Touch, UI")
+var Q = window.Q = Quintus({development: true})
+    .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")
     .setup({
-        width: 960,
-        height: 640,
+        width: screenX,
+        height: screenY,
         downsampleWidth: 1,
         downsampleHeight: 1
 //        maximize: true
     }).controls().touch();
 //load assets
 
-var level = "level5.tmx";
+var level = "level6.tmx";
 
+TileLayerProperties = Q.TileLayer.extend({
+    getSize: function()
+    {
+        var parser = new DOMParser(),
+            doc = parser.parseFromString(Q.asset(level), "application/xml");
+
+        var properties = doc.getElementsByTagName("property");
+        console.log("Properties is " + properties.length);
+        console.log(this.dataAsset);
+        for(var i = 0; i < properties.length; i++)
+        {
+            if(properties[i].getAttribute("name") == "size")
+            {
+                return parseFloat(properties[i].getAttribute("value"));
+            }
+        }
+
+
+
+
+//            width = parseInt(layer.getAttribute("width")),
+//            height = parseInt(layer.getAttribute("height"));
+//
+//        var data = [],
+//            tiles = layer.getElementsByTagName("tile"),
+//            idx = 0;
+//        for(var y = 0;y < height;y++) {
+//            data[y] = [];
+//            for(var x = 0;x < width;x++) {
+//                var tile = tiles[idx];
+//                data[y].push(parseInt(tile.getAttribute("gid")-1));
+//                idx++;
+//            }
+//        }
+    }
+});
+
+Q.animations('player', {
+    walk_right: { frames: [0,1], rate: 1/3},
+    walk_left: { frames: [2,3], rate: 1/3},
+    stand_left: { frames: [2], rate: 1/3},
+    stand_right: { frames: [1], rate: 1/3}
+//    run_right: { frames: [7,6,5,4,3,2,1], rate: 1/15},
+//    run_left: { frames: [19,18,17,16,15], rate:1/15 },
+//    fire_right: { frames: [9,10,10], next: 'stand_right', rate: 1/30, trigger: "fired" },
+//    fire_left: { frames: [20,21,21], next: 'stand_left', rate: 1/30, trigger: "fired" },
+//    stand_right: { frames: [8], rate: 1/5 },
+//    stand_left: { frames: [20], rate: 1/5 },
+//    fall_right: { frames: [2], loop: false },
+//    fall_left: { frames: [14], loop: false }
+});
 
 Q.Sprite.extend("Player",{
     init: function(p) {
-        this._super(p, { asset: "player.png", x: 110, y: 50, jumpSpeed: -580});
-        this.add('2d, platformerControls');
+        this._super(p, {
+//            asset: "autisticplayer.png",
+            sprite:"player",
+            sheet: "player",
+            x: 110,
+            y: 50,
+            jumpSpeed: -580});
+        this.right = true;
+        this.add('2d, platformerControls, animation');
     },
     step: function(dt) {
-        if(Q.inputs['left'] && this.p.direction == 'right') {
-            this.p.flip = 'x';
+//        if(Q.inputs['left'] && this.p.direction == 'right') {
+//            this.p.flip = 'x';
+//        }
+//        if(Q.inputs['right']  && this.p.direction == 'left') {
+//            this.p.flip = false;
+//        }
+        if(this.p.vx > 0)
+        {
+            this.right = true;
+            this.play("walk_right");
         }
-        if(Q.inputs['right']  && this.p.direction == 'left') {
-            this.p.flip = false;
+        if(this.p.vx < 0)
+        {
+            this.right = false;
+            this.play("walk_left");
+        }
+        if(this.p.vx == 0 || this.p.vy != 0)
+        {
+            if(this.right)
+                this.play("stand_right");
+            else
+                this.play("stand_left");
         }
 //        if(this.vy > 0)
 //            this.vx = this.vx * 2;
@@ -54,7 +131,7 @@ Q.Sprite.extend("Player",{
 
 Q.Sprite.extend("Enemy",{
     init: function(p) {
-        this._super(p, { asset: 'enemy.png', vx: 100 });
+        this._super(p, { asset: 'turdman.png', vx: 100 });
         this.add('2d, aiBounce');
 
         this.on("bump.left,bump.right,bump.bottom",function(collision) {
@@ -100,22 +177,39 @@ Q.Sprite.extend("Pipe",{
 
 Q.scene("level2", function(stage) {
     var background = new Q.TileLayer({ dataAsset: level, layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
-    stage.insert(background);
-//    var rep = new Q.Repeater({ asset: "background-wall.png", speedX: 0.5, speedY: 0.5 });
-//    stage.insert(rep);
+//    stage.insert(background);
+//    var midground = new Q.TileLayer({ dataAsset: level, layerIndex: 2, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
+//    stage.insert(midground);
+    var rep = new Q.Repeater({asset: "clouds2.png", speedX: 0.5, speedY: 0.5 });
+    stage.insert(rep);
 
-    stage.collisionLayer(new Q.TileLayer({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 }));
+
+    var world = new TileLayerProperties({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 });
+//    var prop = new TileLayerProperties({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 });
+    var scale = world.getSize();
+//    console.log(world.getSize());
+    if(scale == void 0)
+        scale = 1;
+    stage.collisionLayer(world);
     var player = stage.insert(new Q.Player());
     var enemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
-    var pipe = stage.insert(new Q.Pipe());
+//    var pipe = stage.insert(new Q.Pipe());
     stageMaxX = background.p.w;
     stageMaxY = background.p.h;
-    stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w / 2, minY: 0, maxY: background.p.h / 2});
-    stage.viewport.scale = 0.5;
+    if(stageMaxX * scale < screenX)
+    {
+        Q.width = stageMaxX * scale;
+    }
+    if(stageMaxY * scale < screenY)
+    {
+        Q.height = stageMaxY * scale;
+    }
+    stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w * scale, minY: 0, maxY: background.p.h * scale});
+    stage.viewport.scale = scale;
 });
 
-Q.load("tiles_map.png, player.png, enemy.png, pipe.png, background-wall.png, " + level, function() {
+Q.load("tiles_map.png, autisticplayer.png, turdman.png, pipe.png, clouds2.png, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
+    Q.sheet("player","autisticplayer.png", { tilew: 70, tileh: 70});
     Q.stageScene("level2");
-//    console.log(new Q.TileLayer({ dataAsset: level, layerIndex: 2, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE }).blocks[0]);
 });
