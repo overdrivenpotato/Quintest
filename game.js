@@ -16,8 +16,8 @@ var Q = window.Q = Quintus({development: true})
     .setup({
         width: screenX,
         height: screenY,
-        downsampleWidth: 1,
-        downsampleHeight: 1,
+//        downsampleWidth: 1,
+//        downsampleHeight: 1,
         maximize: "touch"
     }).controls().touch();
 //load assets
@@ -157,9 +157,12 @@ Q.Sprite.extend("Pipe",{
 
 Q.scene("level2", function(stage) {
     var background = new Q.TileLayer({ dataAsset: level, layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
-//    stage.insert(background);
-//    var midground = new Q.TileLayer({ dataAsset: level, layerIndex: 2, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
-//    stage.insert(midground);
+    stage.insert(background);
+
+    var midground = new Q.TileLayer({ dataAsset: level, layerIndex: 2, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
+//    if(midground == undefined)
+//        stage.insert(midground);
+
     var rep = new Q.Repeater({asset: "clouds2.png", speedX: 0.5, speedY: 0.5 });
     stage.insert(rep);
 
