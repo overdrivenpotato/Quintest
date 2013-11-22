@@ -17,12 +17,12 @@ var Q = window.Q = Quintus({development: true})
         width: screenX,
         height: screenY,
         downsampleWidth: 1,
-        downsampleHeight: 1
-//        maximize: true
+        downsampleHeight: 1,
+        maximize: "touch"
     }).controls().touch();
 //load assets
 
-var level = "level6.tmx";
+var level = "level4.tmx";
 
 TileLayerProperties = Q.TileLayer.extend({
     getSize: function()
@@ -94,8 +94,8 @@ Q.Sprite.extend("Player",{
             else
                 this.play("stand_left");
         }
-        if(this.vy > 0)
-            this.vx = this.vx * 200;
+//        if(this.vy > 0)
+//            this.vx = this.vx * 200;
 //        console.log(this.vy);
         if(this.p.x < 0)
             this.p.x = 0;
@@ -176,11 +176,13 @@ Q.scene("level2", function(stage) {
     stageMaxY = background.p.h;
     if(stageMaxX * scale < screenX)
     {
-        Q.width = stageMaxX * scale;
+//        Q.width = stageMaxX * scale;
+        scale = Q.width / stageMaxX;
     }
-    if(stageMaxY * scale < screenY)
+    else if(stageMaxY * scale < screenY)
     {
-        Q.height = stageMaxY * scale;
+//        Q.height = stageMaxY * scale;
+        scale = Q.height / stageMaxY;
     }
     stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w * scale, minY: 0, maxY: background.p.h * scale});
     stage.viewport.scale = scale;
@@ -188,6 +190,6 @@ Q.scene("level2", function(stage) {
 
 Q.load("tiles_map.png, autisticplayer.png, turdman.png, pipe.png, clouds2.png, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
-    Q.sheet("player","autisticplayer.png", { tilew: 70, tileh: 70});
+    Q.sheet("player","autisticplayer.png", { tilew: 51, tileh: 70});
     Q.stageScene("level2");
 });
