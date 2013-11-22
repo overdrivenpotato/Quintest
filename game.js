@@ -40,24 +40,6 @@ TileLayerProperties = Q.TileLayer.extend({
                 return parseFloat(properties[i].getAttribute("value"));
             }
         }
-
-
-
-
-//            width = parseInt(layer.getAttribute("width")),
-//            height = parseInt(layer.getAttribute("height"));
-//
-//        var data = [],
-//            tiles = layer.getElementsByTagName("tile"),
-//            idx = 0;
-//        for(var y = 0;y < height;y++) {
-//            data[y] = [];
-//            for(var x = 0;x < width;x++) {
-//                var tile = tiles[idx];
-//                data[y].push(parseInt(tile.getAttribute("gid")-1));
-//                idx++;
-//            }
-//        }
     }
 });
 
@@ -112,8 +94,8 @@ Q.Sprite.extend("Player",{
             else
                 this.play("stand_left");
         }
-//        if(this.vy > 0)
-//            this.vx = this.vx * 2;
+        if(this.vy > 0)
+            this.vx = this.vx * 200;
 //        console.log(this.vy);
         if(this.p.x < 0)
             this.p.x = 0;
@@ -124,8 +106,6 @@ Q.Sprite.extend("Player",{
             Q.clearStages();
             Q.stageScene("level2");
         }
-//        console.log(stageMaxY);
-//        console.log(this.minX);
     }
 });
 
@@ -185,9 +165,7 @@ Q.scene("level2", function(stage) {
 
 
     var world = new TileLayerProperties({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 });
-//    var prop = new TileLayerProperties({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 });
     var scale = world.getSize();
-//    console.log(world.getSize());
     if(scale == void 0)
         scale = 1;
     stage.collisionLayer(world);
