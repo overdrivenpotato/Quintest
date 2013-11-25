@@ -22,7 +22,7 @@ var Q = window.Q = Quintus({development: true})
     }).controls().touch();
 //load assets
 
-var level = "level4.tmx";
+var level = "Level2.tmx";
 
 TileLayerProperties = Q.TileLayer.extend({
     getSize: function()
