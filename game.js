@@ -22,7 +22,7 @@ var Q = window.Q = Quintus({ audioSupported: [ 'mp3' ], development: true})
     }).controls().touch().enableSound();
 //load assets
 
-var level = "level7.tmx";
+var level = "level10.tmx";
 
 TileLayerProperties = Q.TileLayer.extend({
     getSize: function()
