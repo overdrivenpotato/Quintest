@@ -5,7 +5,6 @@
  * Time: 7:46 PM
  * To change this template use File | Settings | File Templates.
  */
-
 var stageMaxX;
 var stageMaxY;
 var screenX = 960;
@@ -246,6 +245,7 @@ Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, music.mp
     Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});
     Q.load("music.mp3", function(){});
     Q.audio.play("music.mp3", { loop: true });
+    var loadtext = document.getElementById("loading");
+    loadtext.parentNode.removeChild(loadtext);
     Q.stageScene("level2");
-
 });
