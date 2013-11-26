@@ -22,7 +22,7 @@ var Q = window.Q = Quintus({ audioSupported: [ 'mp3' ], development: true})
     }).controls().touch().enableSound();
 //load assets
 
-var level = "level8.tmx";
+var level = "level7.tmx";
 
 TileLayerProperties = Q.TileLayer.extend({
     getSize: function()
@@ -138,6 +138,9 @@ Q.Sprite.extend("Player",{
             Q.clearStages();
             Q.stageScene("level2");
         }
+
+        if(this.p.vy > 1500)
+            this.p.vy = 1500;
     }
 });
 
@@ -242,7 +245,7 @@ Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, music.mp
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
     Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});
     Q.load("music.mp3", function(){});
-    Q.audio.play("music.mp3",{ loop: true });
+    Q.audio.play("music.mp3", { loop: true });
     Q.stageScene("level2");
 
 });
