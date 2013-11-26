@@ -11,15 +11,15 @@ var stageMaxY;
 var screenX = 960;
 var screenY = 640;
 
-var Q = window.Q = Quintus({development: true})
-    .include("Sprites, Scenes, Input, 2D, Anim, Touch, UI")
+var Q = window.Q = Quintus({ audioSupported: [ 'mp3' ], development: true})
+    .include("Sprites, Audio, Scenes, Input, 2D, Anim, Touch, UI")
     .setup({
         width: screenX,
         height: screenY,
 //        downsampleWidth: 1,
 //        downsampleHeight: 1,
         maximize: "touch"
-    }).controls().touch();
+    }).controls().touch().enableSound();
 //load assets
 
 var level = "level7.tmx";
@@ -37,6 +37,7 @@ TileLayerProperties = Q.TileLayer.extend({
         {
             if(properties[i].getAttribute("name") == "size")
             {
+
                 return parseFloat(properties[i].getAttribute("value"));
             }
         }
@@ -183,12 +184,12 @@ Q.scene("level2", function(stage) {
 //    var pipe = stage.insert(new Q.Pipe());
     stageMaxX = background.p.w;
     stageMaxY = background.p.h;
-    if(stageMaxX * scale < screenX)
+    if(stageMaxX * scale < Q.width)
     {
 //        Q.width = stageMaxX * scale;
         scale = Q.width / stageMaxX;
     }
-    else if(stageMaxY * scale < screenY)
+    if(stageMaxY * scale < Q.height)
     {
 //        Q.height = stageMaxY * scale;
         scale = Q.height / stageMaxY;
@@ -197,8 +198,14 @@ Q.scene("level2", function(stage) {
     stage.viewport.scale = scale;
 });
 
-Q.load("tiles_map.png, autisticplayer.png, turdman.png, pipe.png, clouds2.png, " + level, function() {
+Q.load("tiles_map.png, autisticplayer.png, turdman.png, pipe.png, clouds2.png, music.mp3, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
     Q.sheet("player","autisticplayer.png", { tilew: 51, tileh: 70});
+    Q.load("music.mp3", function()
+    {
+
+    });
+    Q.audio.play("music.mp3");
     Q.stageScene("level2");
+
 });
