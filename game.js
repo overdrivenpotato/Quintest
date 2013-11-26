@@ -45,10 +45,10 @@ TileLayerProperties = Q.TileLayer.extend({
 });
 
 Q.animations('player', {
-    walk_right: { frames: [0,1], rate: 1/3},
-    walk_left: { frames: [2,3], rate: 1/3},
-    stand_left: { frames: [2], rate: 1/3},
-    stand_right: { frames: [1], rate: 1/3}
+    walk_right: { frames: [2,3], rate: 1/3},
+    walk_left: { frames: [1,0], rate: 1/3},
+    stand_left: { frames: [1], rate: 1/3},
+    stand_right: { frames: [2], rate: 1/3}
 //    run_right: { frames: [7,6,5,4,3,2,1], rate: 1/15},
 //    run_left: { frames: [19,18,17,16,15], rate:1/15 },
 //    fire_right: { frames: [9,10,10], next: 'stand_right', rate: 1/30, trigger: "fired" },
@@ -162,18 +162,13 @@ Q.Sprite.extend("Pipe",{
 });
 
 Q.scene("level2", function(stage) {
-
-
-//    var midground = new Q.TileLayer({ dataAsset: level, layerIndex: 2, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
-//    if(midground == undefined)
-//        stage.insert(midground);
-
-    var rep = new Q.Repeater({asset: "clouds2.png", speedX: 0.5, speedY: 0.5 });
+    var rep = new Q.Repeater({asset: "clouds3.png", speedX: 0.5, speedY: 0.5 });
     stage.insert(rep);
     var background = new Q.TileLayer({ speedX: 0.7, speedY: 0.7, dataAsset: level, layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
     stage.insert(background);
 
     var world = new TileLayerProperties({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 });
+    var scaleFactor = Q.screenY / 640;
     var scale = world.getSize();
     console.log(scale);
     if(scale == void 0)
@@ -194,13 +189,15 @@ Q.scene("level2", function(stage) {
 //        Q.height = stageMaxY * scale;
         scale = Q.height / stageMaxY;
     }
+    if(Q.touchDevice)
+        scale *= scaleFactor;
     stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w * scale, minY: 0, maxY: background.p.h * scale});
     stage.viewport.scale = scale;
 });
 
-Q.load("tiles_map.png, autisticplayer.png, turdman.png, pipe.png, clouds2.png, music.mp3, " + level, function() {
+Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, music.mp3, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
-    Q.sheet("player","autisticplayer.png", { tilew: 51, tileh: 70});
+    Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});
     Q.load("music.mp3", function()
     {
 
