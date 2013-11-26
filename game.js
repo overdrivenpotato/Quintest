@@ -41,6 +41,34 @@ TileLayerProperties = Q.TileLayer.extend({
                 return parseFloat(properties[i].getAttribute("value"));
             }
         }
+    },
+
+    getPlayerX: function(w)
+    {
+        for(var x = 0; x < w.p.cols; x++)
+        {
+            for(var y = 0; y < w.p.rows; y++)
+            {
+                if(w.p.tiles[y][x] != -1)
+                {
+                    return x * w.p.tileW;
+                }
+            }
+        }
+    },
+
+    getPlayerY: function(w)
+    {
+        for(var x = 0; x < w.p.cols; x++)
+        {
+            for(var y = 0; y < w.p.rows; y++)
+            {
+                if(w.p.tiles[y][x] != -1)
+                {
+                    return y * w.p.tileH;
+                }
+            }
+        }
     }
 });
 
@@ -65,10 +93,8 @@ Q.Sprite.extend("Player",{
 //            asset: "autisticplayer.png",
             sprite:"player",
             sheet: "player",
-            x: 110,
-            y: 50,
             //jumpSpeed: -580
-            jumpSpeed: -580
+            jumpSpeed: -600
         });
         this.right = true;
         this.add('2d, platformerControls, animation');
@@ -174,7 +200,24 @@ Q.scene("level2", function(stage) {
     if(scale == void 0)
         scale = 1;
     stage.collisionLayer(world);
-    var player = stage.insert(new Q.Player());
+
+    var x, y;
+    try
+    {
+        x = 41 / 2 + world.getPlayerX(new Q.TileLayer({ dataAsset: level, layerIndex:2,  sheet: 'tiles', tileW: 70, tileH: 70 }));
+        y = world.getPlayerY(new Q.TileLayer({ dataAsset: level, layerIndex:2,  sheet: 'tiles', tileW: 70, tileH: 70 }));
+    } catch(err)
+    {
+        x = 110;
+        y = 50;
+    }
+//    console.log("X is " + x + ", y is " + y);
+    var player = stage.insert(new Q.Player({
+//        x: 110,
+//        y: 50
+        x: x,
+        y: y
+    }));
     var enemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
 //    var pipe = stage.insert(new Q.Pipe());
     stageMaxX = background.p.w;
@@ -198,11 +241,8 @@ Q.scene("level2", function(stage) {
 Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, music.mp3, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
     Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});
-    Q.load("music.mp3", function()
-    {
-
-    });
-    Q.audio.play("music.mp3");
+    Q.load("music.mp3", function(){});
+    Q.audio.play("music.mp3",{ loop: true });
     Q.stageScene("level2");
 
 });
