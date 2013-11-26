@@ -22,7 +22,7 @@ var Q = window.Q = Quintus({development: true})
     }).controls().touch();
 //load assets
 
-var level = "Level2.tmx";
+var level = "level7.tmx";
 
 TileLayerProperties = Q.TileLayer.extend({
     getSize: function()
@@ -66,7 +66,9 @@ Q.Sprite.extend("Player",{
             sheet: "player",
             x: 110,
             y: 50,
-            jumpSpeed: -580});
+            //jumpSpeed: -580
+            jumpSpeed: -580
+        });
         this.right = true;
         this.add('2d, platformerControls, animation');
     },
@@ -94,6 +96,9 @@ Q.Sprite.extend("Player",{
             else
                 this.play("stand_left");
         }
+//        if(!Q.inputs['up'] && this.p.vy < 0){
+//            this.p.vx += 150;
+//        }
 //        if(this.vy > 0)
 //            this.vx = this.vx * 200;
 //        console.log(this.vy);
@@ -156,19 +161,20 @@ Q.Sprite.extend("Pipe",{
 });
 
 Q.scene("level2", function(stage) {
-    var background = new Q.TileLayer({ dataAsset: level, layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
-    stage.insert(background);
 
-    var midground = new Q.TileLayer({ dataAsset: level, layerIndex: 2, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
+
+//    var midground = new Q.TileLayer({ dataAsset: level, layerIndex: 2, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
 //    if(midground == undefined)
 //        stage.insert(midground);
 
     var rep = new Q.Repeater({asset: "clouds2.png", speedX: 0.5, speedY: 0.5 });
     stage.insert(rep);
-
+    var background = new Q.TileLayer({ speedX: 0.7, speedY: 0.7, dataAsset: level, layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
+    stage.insert(background);
 
     var world = new TileLayerProperties({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 });
     var scale = world.getSize();
+    console.log(scale);
     if(scale == void 0)
         scale = 1;
     stage.collisionLayer(world);
