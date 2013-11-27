@@ -21,7 +21,7 @@ var Q = window.Q = Quintus({ audioSupported: [ 'mp3' ], development: true})
     }).controls().touch().enableSound();
 //load assets
 
-var level = "level10.tmx";
+var level = "level8.tmx";
 
 TileLayerProperties = Q.TileLayer.extend({
     getSize: function()
@@ -30,8 +30,8 @@ TileLayerProperties = Q.TileLayer.extend({
             doc = parser.parseFromString(Q.asset(level), "application/xml");
 
         var properties = doc.getElementsByTagName("property");
-        console.log("Properties is " + properties.length);
-        console.log(this.dataAsset);
+//        console.log("Properties is " + properties.length);
+//        console.log(this.dataAsset);
         for(var i = 0; i < properties.length; i++)
         {
             if(properties[i].getAttribute("name") == "size")
@@ -188,17 +188,26 @@ Q.Sprite.extend("Pipe",{
         });
     }
 });
+var pumprate = 2181.818181818182;//1090.909090909;//545.45454545;//1.0 / (110.0 / 60.0);
+var seconds = getTime();
+var origscale;
 
-Q.scene("level2", function(stage) {
+function getTime()
+{
+    return new Date().getTime();
+}
+
+Q.scene("level2", function(stage)
+{
     var rep = new Q.Repeater({asset: "clouds3.png", speedX: 0.5, speedY: 0.5 });
     stage.insert(rep);
     var background = new Q.TileLayer({ speedX: 0.7, speedY: 0.7, dataAsset: level, layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
     stage.insert(background);
 
     var world = new TileLayerProperties({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 });
-    var scaleFactor = Q.screenY / 640;
+    var scaleFactor = Q.screenY / screenY;
     var scale = world.getSize();
-    console.log(scale);
+//    console.log(scale);
     if(scale == void 0)
         scale = 1;
     stage.collisionLayer(world);
@@ -236,15 +245,49 @@ Q.scene("level2", function(stage) {
     }
     if(Q.touchDevice)
         scale *= scaleFactor;
+
     stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w * scale, minY: 0, maxY: background.p.h * scale});
     stage.viewport.scale = scale;
+    origscale = scale;
+    stage.step = function(dt)
+    {
+        if(this.paused) { return false; }
+
+        this.trigger("prestep",dt);
+        this.updateSprites(this.items,dt);
+        this.trigger("step",dt);
+
+        if(this.removeList.length > 0) {
+            for(var i=0,len=this.removeList.length;i<len;i++) {
+                this.forceRemove(this.removeList[i]);
+            }
+            this.removeList.length = 0;
+        }
+
+        this.trigger('poststep',dt);
+
+        if(pumprate < (getTime() - seconds))
+        {
+//            console.log("Pump");
+            seconds = getTime();
+//            this.viewport.scale = origscale * 1.1;
+        }
+//        console.log("Currect scale: " + this.viewport.scale);
+//        console.log(origscale * (((getTime() - seconds) / pumprate) * 0.01 + 1));
+        this.viewport.scale = origscale * (((getTime() - seconds) / pumprate) * 0.03 + 1);
+        this.viewport.boundingBox.maxX = background.p.w * this.viewport.scale;
+        this.viewport.boundingBox.maxY = background.p.h* this.viewport.scale;
+    }
 });
 
-Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, music.mp3, " + level, function() {
+Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, industryintro.mp3, industryloop.mp3, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
     Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});
-    Q.load("music.mp3", function(){});
-    Q.audio.play("music.mp3", { loop: true });
+    Q.load("industryloop.mp3", function(){
+        console.log("Loaded?");
+    });
+    Q.audio.play("industryloop.mp3", { loop: true })
+    seconds = getTime();
     var loadtext = document.getElementById("loading");
     loadtext.parentNode.removeChild(loadtext);
     Q.stageScene("level2");
