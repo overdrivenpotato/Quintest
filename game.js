@@ -16,7 +16,7 @@ var Q = window.Q = Quintus({ audioSupported: [ 'mp3' ], development: true})
         width: screenX,
         height: screenY,
 //        downsampleWidth: 1,
-//        downsampleHeight: 1,
+        downsampleHeight: 1280,
         maximize: "touch"
     }).controls().touch().enableSound();
 //load assets
@@ -30,19 +30,12 @@ TileLayerProperties = Q.TileLayer.extend({
             doc = parser.parseFromString(Q.asset(level), "application/xml");
 
         var properties = doc.getElementsByTagName("property");
-//        console.log("Properties is " + properties.length);
-//        console.log(this.dataAsset);
         for(var i = 0; i < properties.length; i++)
-        {
             if(properties[i].getAttribute("name") == "size")
-            {
-
                 return parseFloat(properties[i].getAttribute("value"));
-            }
-        }
     },
 
-    getPlayerX: function(w)
+    getPlayerPos: function(w)
     {
         for(var x = 0; x < w.p.cols; x++)
         {
@@ -50,21 +43,7 @@ TileLayerProperties = Q.TileLayer.extend({
             {
                 if(w.p.tiles[y][x] != -1)
                 {
-                    return x * w.p.tileW;
-                }
-            }
-        }
-    },
-
-    getPlayerY: function(w)
-    {
-        for(var x = 0; x < w.p.cols; x++)
-        {
-            for(var y = 0; y < w.p.rows; y++)
-            {
-                if(w.p.tiles[y][x] != -1)
-                {
-                    return y * w.p.tileH;
+                    return {y: y * w.p.tileH, x: x * w.p.tileW};
                 }
             }
         }
@@ -89,22 +68,14 @@ Q.animations('player', {
 Q.Sprite.extend("Player",{
     init: function(p) {
         this._super(p, {
-//            asset: "autisticplayer.png",
             sprite:"player",
             sheet: "player",
-            //jumpSpeed: -580
             jumpSpeed: -600
         });
         this.right = true;
         this.add('2d, platformerControls, animation');
     },
     step: function(dt) {
-//        if(Q.inputs['left'] && this.p.direction == 'right') {
-//            this.p.flip = 'x';
-//        }
-//        if(Q.inputs['right']  && this.p.direction == 'left') {
-//            this.p.flip = false;
-//        }
         if(this.p.vx > 0)
         {
             this.right = true;
@@ -122,12 +93,6 @@ Q.Sprite.extend("Player",{
             else
                 this.play("stand_left");
         }
-//        if(!Q.inputs['up'] && this.p.vy < 0){
-//            this.p.vx += 150;
-//        }
-//        if(this.vy > 0)
-//            this.vx = this.vx * 200;
-//        console.log(this.vy);
         if(this.p.x < 0)
             this.p.x = 0;
         if(this.p.x > stageMaxX)
@@ -138,8 +103,8 @@ Q.Sprite.extend("Player",{
             Q.stageScene("level2");
         }
 
-        if(this.p.vy > 1500)
-            this.p.vy = 1500;
+        if(this.p.vy > 1200)
+            this.p.vy = 1200;
     }
 });
 
@@ -207,7 +172,6 @@ Q.scene("level2", function(stage)
     var world = new TileLayerProperties({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 });
     var scaleFactor = Q.screenY / screenY;
     var scale = world.getSize();
-//    console.log(scale);
     if(scale == void 0)
         scale = 1;
     stage.collisionLayer(world);
@@ -215,17 +179,15 @@ Q.scene("level2", function(stage)
     var x, y;
     try
     {
-        x = 41 / 2 + world.getPlayerX(new Q.TileLayer({ dataAsset: level, layerIndex:2,  sheet: 'tiles', tileW: 70, tileH: 70 }));
-        y = world.getPlayerY(new Q.TileLayer({ dataAsset: level, layerIndex:2,  sheet: 'tiles', tileW: 70, tileH: 70 }));
+        var pos = world.getPlayerPos(new Q.TileLayer({ dataAsset: level, layerIndex:2,  sheet: 'tiles', tileW: 70, tileH: 70 }));
+        x = 41 / 2 + pos.x;
+        y = pos.y;
     } catch(err)
     {
         x = 110;
         y = 50;
     }
-//    console.log("X is " + x + ", y is " + y);
     var player = stage.insert(new Q.Player({
-//        x: 110,
-//        y: 50
         x: x,
         y: y
     }));
@@ -235,16 +197,14 @@ Q.scene("level2", function(stage)
     stageMaxY = background.p.h;
     if(stageMaxX * scale < Q.width)
     {
-//        Q.width = stageMaxX * scale;
         scale = Q.width / stageMaxX;
     }
     if(stageMaxY * scale < Q.height)
     {
-//        Q.height = stageMaxY * scale;
         scale = Q.height / stageMaxY;
     }
-    if(Q.touchDevice)
-        scale *= scaleFactor;
+//    if(Q.touchDevice)
+//        scale *= scaleFactor;
 
     stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w * scale, minY: 0, maxY: background.p.h * scale});
     stage.viewport.scale = scale;
@@ -267,27 +227,22 @@ Q.scene("level2", function(stage)
         this.trigger('poststep',dt);
 
         if(pumprate < (getTime() - seconds))
-        {
-//            console.log("Pump");
             seconds = getTime();
-//            this.viewport.scale = origscale * 1.1;
-        }
-//        console.log("Currect scale: " + this.viewport.scale);
-//        console.log(origscale * (((getTime() - seconds) / pumprate) * 0.01 + 1));
+
         this.viewport.scale = origscale * (((getTime() - seconds) / pumprate) * 0.03 + 1);
         this.viewport.boundingBox.maxX = background.p.w * this.viewport.scale;
         this.viewport.boundingBox.maxY = background.p.h* this.viewport.scale;
     }
 });
 
-Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, industryintro.mp3, industryloop.mp3, " + level, function() {
+Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
     Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});
     Q.load("industryloop.mp3", function(){
         console.log("Loaded?");
+        Q.audio.play("industryloop.mp3", { loop: true });
+        seconds = getTime();
     });
-    Q.audio.play("industryloop.mp3", { loop: true })
-    seconds = getTime();
     var loadtext = document.getElementById("loading");
     loadtext.parentNode.removeChild(loadtext);
     Q.stageScene("level2");
