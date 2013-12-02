@@ -230,11 +230,63 @@ Q.scene("level2", function(stage)
         if(pump)
         {
             if(pumprate < (getTime() - seconds))
+            {
                 seconds = getTime();
+            }
 
             this.viewport.scale = origscale * (((getTime() - seconds) / pumprate) * 0.03 + 1);
             this.viewport.boundingBox.maxX = background.p.w * this.viewport.scale;
             this.viewport.boundingBox.maxY = background.p.h* this.viewport.scale;
+        }
+
+        if(!document.hasFocus())
+        {
+            console.log("Not focused.");
+            this.pause();
+            Q.audio.pauseGame();
+            Q.stageScene("testUI", {prevStage: this});
+        }
+    }
+});
+
+Q.scene("testUI", function(stage)
+{
+    var container = stage.insert(new Q.UI.Container({
+        fill: "gray",
+        border: 5,
+        shadow: 10,
+        shadowColor: "rgba(0,0,0,0.5)",
+        y: 50,
+        x: Q.width/2
+    }));
+
+    stage.insert(new Q.UI.Text({
+        label: "Pause menu swag",
+        color: "white",
+        x: 0,
+        y: 0
+    }),container);
+
+    container.fit(20,20);
+    stage.step = function(dt)
+    {
+        if(this.paused) { return false; }
+
+        this.trigger("prestep",dt);
+        this.updateSprites(this.items,dt);
+        this.trigger("step",dt);
+
+        if(this.removeList.length > 0) {
+            for(var i=0,len=this.removeList.length;i<len;i++) {
+                this.forceRemove(this.removeList[i]);
+            }
+            this.removeList.length = 0;
+        }
+
+        if(document.hasFocus())
+        {
+            console.log("Unpausing with new scene...");
+            Q.stageScene("level2");
         }
     }
 });
