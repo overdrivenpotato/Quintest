@@ -153,9 +153,10 @@ Q.Sprite.extend("Pipe",{
         });
     }
 });
-var pumprate = 2181.818181818182;//1090.909090909;//545.45454545;//1.0 / (110.0 / 60.0);
+var pumprate = 240000 / 110;//2181.818181818182;//1090.909090909;//545.45454545;//1.0 / (110.0 / 60.0);
 var seconds = getTime();
 var origscale;
+var pump = true;
 
 function getTime()
 {
@@ -226,12 +227,15 @@ Q.scene("level2", function(stage)
 
         this.trigger('poststep',dt);
 
-        if(pumprate < (getTime() - seconds))
-            seconds = getTime();
+        if(pump)
+        {
+            if(pumprate < (getTime() - seconds))
+                seconds = getTime();
 
-        this.viewport.scale = origscale * (((getTime() - seconds) / pumprate) * 0.03 + 1);
-        this.viewport.boundingBox.maxX = background.p.w * this.viewport.scale;
-        this.viewport.boundingBox.maxY = background.p.h* this.viewport.scale;
+            this.viewport.scale = origscale * (((getTime() - seconds) / pumprate) * 0.03 + 1);
+            this.viewport.boundingBox.maxX = background.p.w * this.viewport.scale;
+            this.viewport.boundingBox.maxY = background.p.h* this.viewport.scale;
+        }
     }
 });
 
