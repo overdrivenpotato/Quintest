@@ -16,7 +16,8 @@ var Q = window.Q = Quintus({ audioSupported: [ 'mp3' ], development: true})
         width: screenX,
         height: screenY,
 //        downsampleWidth: 1,
-        downsampleHeight: 1280,
+        resampleHeight: 800,
+        resampleFactor: 2.5,
         maximize: "touch"
     }).controls().touch().enableSound();
 //load assets
@@ -33,6 +34,7 @@ TileLayerProperties = Q.TileLayer.extend({
         for(var i = 0; i < properties.length; i++)
             if(properties[i].getAttribute("name") == "size")
                 return parseFloat(properties[i].getAttribute("value"));
+        return 1.0;
     },
 
     getPlayerPos: function(w)
@@ -47,6 +49,7 @@ TileLayerProperties = Q.TileLayer.extend({
                 }
             }
         }
+        return { x:-1, y:-1};
     }
 });
 
@@ -75,7 +78,7 @@ Q.Sprite.extend("Player",{
         this.right = true;
         this.add('2d, platformerControls, animation');
     },
-    step: function(dt) {
+    step: function() {
         if(this.p.vx > 0)
         {
             this.right = true;
@@ -153,10 +156,10 @@ Q.Sprite.extend("Pipe",{
         });
     }
 });
-var pumprate = 240000 / 110;//2181.818181818182;//1090.909090909;//545.45454545;//1.0 / (110.0 / 60.0);
+var pumprate = 240000.0 / 110.0;
 var seconds = getTime();
 var origscale;
-var pump = true;
+var pump = !Q.touchDevice;
 
 function getTime()
 {
@@ -171,10 +174,9 @@ Q.scene("level2", function(stage)
     stage.insert(background);
 
     var world = new TileLayerProperties({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 });
-    var scaleFactor = Q.screenY / screenY;
     var scale = world.getSize();
-    if(scale == void 0)
-        scale = 1;
+//    if(scale == void 0)
+//        scale = 1;
     stage.collisionLayer(world);
 
     var x, y;
@@ -192,7 +194,7 @@ Q.scene("level2", function(stage)
         x: x,
         y: y
     }));
-    var enemy = stage.insert(new Q.Enemy({ x: 700, y: 0 }));
+    stage.insert(new Q.Enemy({ x: 700, y: 0 }));
 //    var pipe = stage.insert(new Q.Pipe());
     stageMaxX = background.p.w;
     stageMaxY = background.p.h;
@@ -204,8 +206,6 @@ Q.scene("level2", function(stage)
     {
         scale = Q.height / stageMaxY;
     }
-//    if(Q.touchDevice)
-//        scale *= scaleFactor;
 
     stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w * scale, minY: 0, maxY: background.p.h * scale});
     stage.viewport.scale = scale;
@@ -244,7 +244,7 @@ Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, " + leve
     Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});
     Q.load("industryloop.mp3", function(){
         console.log("Loaded?");
-        Q.audio.play("industryloop.mp3", { loop: true });
+//        Q.audio.play("industryloop.mp3", { loop: true });
         seconds = getTime();
     });
     var loadtext = document.getElementById("loading");
