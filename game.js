@@ -243,7 +243,7 @@ Q.scene("level2", function(stage)
         {
             console.log("Not focused.");
             this.pause();
-            Q.audio.pauseGame();
+//            Q.audio.pauseGame();
             Q.stageScene("testUI", {prevStage: this});
         }
     }
@@ -296,7 +296,7 @@ Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, " + leve
     Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});
     Q.load("industryloop.mp3", function(){
         console.log("Loaded?");
-//        Q.audio.play("industryloop.mp3", { loop: true });
+        Q.audio.play("industryloop.mp3", { loop: true });
         seconds = getTime();
     });
     var loadtext = document.getElementById("loading");
