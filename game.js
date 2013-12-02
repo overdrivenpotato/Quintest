@@ -1,9 +1,35 @@
 /**
- * Created with JetBrains WebStorm.
- * User: Marko
- * Date: 11/16/13
- * Time: 7:46 PM
- * To change this template use File | Settings | File Templates.
+ * knock knock
+ * who's there?
+ * 100% pure swag.
+ *
+ *     .           .           .           .           .           .
+ *    ...         ...         ...         ...         ...         ...
+ *   .....       .....       .....       .....       .....       .....
+ *    ...         ...         ...         ...         ...         ...
+ *     .           .           .           .           .           .
+ *
+ *
+ * -----------------------------  GILGORM AUTHORS ------------------------------
+ * A game originally concieved by Marko Mijalkovic and Lucas Tennen
+ * Since creation, gilgorm has been expanded to a team of 7 people featuring:
+ *  -Marko
+ *  -Lucas
+ *  -Jeremie
+ *  -Luka
+ *  -Daniel
+ *  -Pratt
+ *  -Alex
+ * -----------------------------------------------------------------------------
+ *
+ *                               === Game.js ===
+ *                      This file holds the main game code
+ *
+ *         All of the game code is currently stored in here, feel free to modify
+ *    this file as needed. If you are commiting to the master branch, make sure to
+ *    pace your commits and not create a patch holding all the changes you've made
+ *    since December 31, 1948. Thanks for sharing and thanks for caring.
+ *          -Marko
  */
 var stageMaxX;
 var stageMaxY;
