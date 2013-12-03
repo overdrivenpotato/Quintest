@@ -98,7 +98,7 @@ Q.Sprite.extend("Player",{
         this._super(p, {
             sprite:"player",
             sheet: "player",
-            jumpSpeed: -600     //Player y velocity upon jump
+            jumpSpeed: -620     //Player y velocity upon jump
         });
         this.right = true;      //Facing right by default
         this.add('2d, platformerControls, animation');    //Add basic controls
