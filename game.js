@@ -112,7 +112,7 @@ Q.Sprite.extend("Player",{
             this.play("walk_right");   // play walking right animation
         }
         if(this.p.vx < 0)              //If velocity is under 0,
-        {                              //
+        {
             this.right = false;        // set player to be walking left
             this.play("walk_left");    // play walking left animation
         }
@@ -235,6 +235,7 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
         sheet: 'tiles',                //Use tile sheet 'tiles'
         tileW: 70,                     //Tile width is 70px
         tileH: 70,                     //Tile height is 70px
+        type: Q.SPRITE_NONE
     });
     stage.insert(midGround);           //Add midground to stage
 
