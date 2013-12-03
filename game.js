@@ -31,26 +31,30 @@
  *    since December 31, 1948. Thanks for sharing and thanks for caring.
  *          -Marko
  */
-var stageMaxX;
-var stageMaxY;
-var screenX = 960;
-var screenY = 640;
+var stageMaxX;      //A variable to store the maximum that a player can walk to the right
+var stageMaxY;      //Like @stageMaxX, except for the height.
+var screenX = 960;  //Default screen width on browser
+var screenY = 640;  //Default screen height on browser
 
-var Q = window.Q = Quintus({ audioSupported: [ 'mp3' ], development: true})
-    .include("Sprites, Audio, Scenes, Input, 2D, Anim, Touch, UI")
+//Create a new quintus instance
+var Q = window.Q = Quintus({ audioSupported: ['mp3'], development: true})
+    .include("Sprites, Audio, Scenes, Input, 2D, Anim, Touch, UI") //Load modules
     .setup({
-        width: screenX,
-        height: screenY,
-//        downsampleWidth: 1,
-        resampleHeight: 800,
-        resampleFactor: 2.5,
-        maximize: "touch"
-    }).controls().touch().enableSound();
-//load assets
+        width: screenX,      //Default screen width in browser
+        height: screenY,     //Default screen height in browser
+        resampleHeight: 800, //Resize the zoom level if screenY is greater than 800
+        resampleFactor: 2.5, //    -> resize it by a factor of 2.5
+        maximize: "touch"    //Disregard screenX and screenY if on mobile browser
+    }).controls().touch().enableSound(); //Enable needed modules
 
-var level = "level7.tmx";
+var level = "level7.tmx"; //Very temporary placeholder for current level
 
+/* TileLayerProperties
+ * Wrote this class to help with loading meta data from the map
+ * This will be replaced when we write our own level editor
+ */
 TileLayerProperties = Q.TileLayer.extend({
+    //Get map zoom level, defaults to 1
     getSize: function()
     {
         var parser = new DOMParser(),
@@ -63,147 +67,186 @@ TileLayerProperties = Q.TileLayer.extend({
         return 1.0;
     },
 
-    getPlayerPos: function(w)
+    //Get starting player coordinates from level
+    getPlayerPos: function(level)
     {
-        for(var x = 0; x < w.p.cols; x++)
+        for(var x = 0; x < level.p.cols; x++)          //Loop through columns
         {
-            for(var y = 0; y < w.p.rows; y++)
+            for(var y = 0; y < level.p.rows; y++)      //Loop through rows
             {
-                if(w.p.tiles[y][x] != -1)
+                if(level.p.tiles[y][x] != -1)          //If match is found, return that location
                 {
-                    return {y: y * w.p.tileH, x: x * w.p.tileW};
+                    return {y: y * level.p.tileH, x: x * level.p.tileW};
                 }
             }
         }
-        return { x:-1, y:-1};
+        return { x:-1, y:-1}; //Return impossible values if player not found
     }
 });
 
+//Setup player animations currently implemented
 Q.animations('player', {
     walk_right: { frames: [2,3], rate: 1/3},
     walk_left: { frames: [1,0], rate: 1/3},
     stand_left: { frames: [1], rate: 1/3},
     stand_right: { frames: [2], rate: 1/3}
-//    run_right: { frames: [7,6,5,4,3,2,1], rate: 1/15},
-//    run_left: { frames: [19,18,17,16,15], rate:1/15 },
-//    fire_right: { frames: [9,10,10], next: 'stand_right', rate: 1/30, trigger: "fired" },
-//    fire_left: { frames: [20,21,21], next: 'stand_left', rate: 1/30, trigger: "fired" },
-//    stand_right: { frames: [8], rate: 1/5 },
-//    stand_left: { frames: [20], rate: 1/5 },
-//    fall_right: { frames: [2], loop: false },
-//    fall_left: { frames: [14], loop: false }
 });
 
+//Player class to hold all player code
 Q.Sprite.extend("Player",{
     init: function(p) {
         this._super(p, {
             sprite:"player",
             sheet: "player",
-            jumpSpeed: -600
+            jumpSpeed: -600     //Player y velocity upon jump
         });
-        this.right = true;
-        this.add('2d, platformerControls, animation');
+        this.right = true;      //Facing right by default
+        this.add('2d, platformerControls, animation');    //Add basic controls
     },
+
+    //Runs on each game step
     step: function() {
-        if(this.p.vx > 0)
+        if(this.p.vx > 0)              //If velocity is over 0,
         {
-            this.right = true;
-            this.play("walk_right");
+            this.right = true;         // set player to be walking right
+            this.play("walk_right");   // play walking right animation
         }
-        if(this.p.vx < 0)
-        {
-            this.right = false;
-            this.play("walk_left");
-        }
-        if(this.p.vx == 0 || this.p.vy != 0)
-        {
-            if(this.right)
-                this.play("stand_right");
-            else
-                this.play("stand_left");
-        }
-        if(this.p.x < 0)
-            this.p.x = 0;
-        if(this.p.x > stageMaxX)
-            this.p.x = stageMaxX;
-        if(this.p.y + 35 > stageMaxY)
-        {
-            Q.clearStages();
-            Q.stageScene("level2");
+        if(this.p.vx < 0)              //If velocity is under 0,
+        {                              //
+            this.right = false;        // set player to be walking left
+            this.play("walk_left");    // play walking left animation
         }
 
-        if(this.p.vy > 1200)
-            this.p.vy = 1200;
+        if(this.p.vx == 0 || this.p.vy != 0)    //If player has stopped moving or is jumping
+        {
+            if(this.right)                      //If facing right
+                this.play("stand_right");       //Look right
+            else                                //else
+                this.play("stand_left");        //Look left
+        }
+
+        if(this.p.x < 0)               //If player's x position is too far left of map
+            this.p.x = 0;              //   put him back on the map at 0
+        if(this.p.x > stageMaxX)       //Likewise,
+            this.p.x = stageMaxX;      //  except with right side
+
+        if(this.p.y + 35 > stageMaxY)  //Same thing with map height, although I add 35 because the player
+        {                              //   is 70px tall and 35 is half of 70.
+            Q.clearStages();           //Remove stages (duh)
+            Q.stageScene("level2");    //Reload same level
+        }
+
+        if(this.p.vy > 1200)           //If player velocity is greater than 1200
+            this.p.vy = 1200;          //  enforce terminal velocity
     }
 });
 
+//Enemy class for the shitty turd, this will be removed soon
 Q.Sprite.extend("Enemy",{
     init: function(p) {
-        this._super(p, { asset: 'turdman.png', vx: 100 });
-        this.add('2d, aiBounce');
+        this._super(p, { asset: 'turdman.png', vx: 100 });         //Set velocity to 100 [->]
+        this.add('2d, aiBounce');                                  //Ai bounces when it hits a wall
 
-        this.on("bump.left,bump.right,bump.bottom",function(collision) {
-            if(collision.obj.isA("Player")) {
-                Q.stageScene("endGame",1, { label: "You Died" });
-                collision.obj.destroy();
-                Q.clearStages();
-                Q.stageScene("level2");
+        this.on("bump.left,bump.right,bump.bottom",function(collision) {    //If bumped from any side except top
+            if(collision.obj.isA("Player")) {                               //If player
+                Q.clearStages();                                            //Reset game
+                Q.stageScene("level2");                                     //Load same level
             }
         });
 
-        this.on("bump.top",function(collision) {
-            if(collision.obj.isA("Player")) {
-                this.destroy();
-                collision.obj.p.vy = -300;
+        this.on("bump.top",function(collision) {      //If bumped from the top
+            if(collision.obj.isA("Player")) {         //If player
+                this.destroy();                       //Destroy this enemy instance
+                collision.obj.p.vy = -300;            //This sets the player's y velocity to -300
             }
         });
 
     }
 });
 
-Q.Sprite.extend("Pipe",{
-    init: function(p){
-        this._super(p, {asset: "pipe.png", x: 3045, y: 280});
-        this.add("2d");
-//        this.on("hit.sprite", function(collision)
-//        {
-//            if(collision.obj.isA("Pipe") && collision.obj.x == this.x - 70 && Q.inputs['down'])
-//            {
+//Unused Pipe object for now, it used to be useful, is now not useable
+//Q.Sprite.extend("Pipe",{
+//    init: function(p){
+//        this._super(p, {asset: "pipe.png", x: 3045, y: 280});
+//        this.add("2d");
+////        this.on("hit.sprite", function(collision)
+////        {
+////            if(collision.obj.isA("Pipe") && collision.obj.x == this.x - 70 && Q.inputs['down'])
+////            {
+////                Q.clearStages();
+////                Q.stageScene("level2");
+////            }
+////        });
+////        this._super(p, { asset: 'pipe.png', x: 3045, y: 280}) ;
+//        this.on("bump.top", function(collision) {
+//            if(collision.obj.isA("Player") && Q.inputs['down']) {
 //                Q.clearStages();
 //                Q.stageScene("level2");
 //            }
 //        });
-//        this._super(p, { asset: 'pipe.png', x: 3045, y: 280}) ;
-        this.on("bump.top", function(collision) {
-            if(collision.obj.isA("Player") && Q.inputs['down']) {
-                Q.clearStages();
-                Q.stageScene("level2");
-            }
-        });
-    }
-});
-var pumprate = 240000.0 / 110.0;
-var seconds = getTime();
-var origscale;
-var pump = !Q.touchDevice;
+//    }
+//});
 
+
+/* @pumpRate is the amount of milliseconds between pulses
+ * It can be calculated based on the following:
+ *   -The music tempo is 110bpm
+ *   -The kick drum hits once every 4 beats
+ *
+ * With this knowledge, we can first create an equation of 60 / 110
+ * for the number of seconds a beat lasts. We then multiply 60 by 4 to make
+ * 240 which gives us the length of a pulse in seconds every 4 beats. The equation
+ * is now 240 / 110. At last, you multiply 240 by 1000 to change from seconds
+ * to milliseconds.
+ *
+ *      The final equation is 240000.0 / 110.0. The ".0" is to ensure a
+ * floating-point calculation.
+ */
+var pumpRate = 240000.0 / 110.0;   //Explained above ^
+var seconds = getTime();           //@seconds acts as a counter keeping the last recorded time
+var targetScale;                   //Used in the pump equation to continually pulse towards this scale value
+var pump = !Q.touchDevice;         //Only pump if not on a mobile device, otherwise it'll look pretty strange
+
+//This function gets the current CMOS time in ms
 function getTime()
 {
     return new Date().getTime();
 }
 
-Q.scene("level2", function(stage)
-{
-    var rep = new Q.Repeater({asset: "clouds3.png", speedX: 0.5, speedY: 0.5 });
-    stage.insert(rep);
-    var background = new Q.TileLayer({ speedX: 0.7, speedY: 0.7, dataAsset: level, layerIndex: 0, sheet: 'tiles', tileW: 70, tileH: 70, type: Q.SPRITE_NONE });
-    stage.insert(background);
+/* This defines the scene "level2".
+ *
+ *      "level2" does not actually load level2.tmx (I know, bad nomenclature).
+ * Instead, level2 defines a generalized stage polymorphic to any level which can be loaded.
+ * It defines basics such as stage objects, and redefines things such as the step method to do visual fx/ui
+ */
+Q.scene("level2", function(stage) {    //Stage is passed to this function as the object to use in loading.
 
-    var world = new TileLayerProperties({ dataAsset: level, layerIndex:1,  sheet: 'tiles', tileW: 70, tileH: 70 });
-    var scale = world.getSize();
-//    if(scale == void 0)
-//        scale = 1;
-    stage.collisionLayer(world);
+    var background = new Q.Repeater({  //Background is the background pic to the stage
+        asset: "clouds3.png",          //Use clouds3.png as the background (grey starry background)
+        speedX: 0.5,                   //Set horizontal movement to half of main stage movement
+        speedY: 0.5                    //Set vertical movement to half of main stage movement
+    });
+    stage.insert(background);          //Add this layer to the stage
+
+
+    var midGround = new Q.TileLayer({  //Used as non-interactive layer in the level editor
+        dataAsset: level,              //Load the @level variable's level, e.g. "level7.tmx"
+        layerIndex: 0,                 //Use the first layer
+        sheet: 'tiles',                //Use tile sheet 'tiles'
+        tileW: 70,                     //Tile width is 70px
+        tileH: 70,                     //Tile height is 70px
+    });
+    stage.insert(midGround);           //Add midground to stage
+
+    var world = new TileLayerProperties({   //Used as the collision layer in the world
+        dataAsset: level,                   //Load the @level variable's level, e.g. "level7.tmx"
+        layerIndex:1,                       //Use the second layer (0-based index!)
+        sheet: 'tiles',                     //Use tile sheet 'tiles'
+        tileW: 70,                          //Tile width is 70px
+        tileH: 70                           //Tile height is 70px
+    });
+    var scale = world.getSize();            //Get world scale specified by level creator
+    stage.collisionLayer(world);            //Set as collision layer
 
     var x, y;
     try
@@ -220,10 +263,10 @@ Q.scene("level2", function(stage)
         x: x,
         y: y
     }));
-    stage.insert(new Q.Enemy({ x: 700, y: 0 }));
-//    var pipe = stage.insert(new Q.Pipe());
-    stageMaxX = background.p.w;
-    stageMaxY = background.p.h;
+
+    stage.insert(new Q.Enemy({ x: 700, y: 0 }));  //Add a turdman in at coords 700x0
+    stageMaxX = midGround.p.w;
+    stageMaxY = midGround.p.h;
     if(stageMaxX * scale < Q.width)
     {
         scale = Q.width / stageMaxX;
@@ -233,9 +276,9 @@ Q.scene("level2", function(stage)
         scale = Q.height / stageMaxY;
     }
 
-    stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: background.p.w * scale, minY: 0, maxY: background.p.h * scale});
+    stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: midGround.p.w * scale, minY: 0, maxY: midGround.p.h * scale});
     stage.viewport.scale = scale;
-    origscale = scale;
+    targetScale = scale;
     stage.step = function(dt)
     {
         if(this.paused) { return false; }
@@ -255,14 +298,14 @@ Q.scene("level2", function(stage)
 
         if(pump)
         {
-            if(pumprate < (getTime() - seconds))
+            if(pumpRate < (getTime() - seconds))
             {
                 seconds = getTime();
             }
 
-            this.viewport.scale = origscale * (((getTime() - seconds) / pumprate) * 0.03 + 1);
-            this.viewport.boundingBox.maxX = background.p.w * this.viewport.scale;
-            this.viewport.boundingBox.maxY = background.p.h* this.viewport.scale;
+            this.viewport.scale = targetScale * (((getTime() - seconds) / pumpRate) * 0.03 + 1);
+            this.viewport.boundingBox.maxX = midGround.p.w * this.viewport.scale;
+            this.viewport.boundingBox.maxY = midGround.p.h* this.viewport.scale;
         }
 
         if(!document.hasFocus())
