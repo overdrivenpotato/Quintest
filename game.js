@@ -298,7 +298,7 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
     });
     stage.viewport.scale = scale;             //Set the stage's scale to the scale modifier
 
-    //     This is used for the pulsing effect,
+    // This is used for the pulsing effect,
     // the pulse tries to conform to this scale
     // every time it pulses
     targetScale = scale;
