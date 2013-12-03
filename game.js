@@ -11,7 +11,7 @@
  *
  *
  * -----------------------------  GILGORM AUTHORS ------------------------------
- * A game originally concieved by Marko Mijalkovic and Lucas Tennen
+ *     A game originally concieved by Marko Mijalkovic and Lucas Tennen
  * Since creation, gilgorm has been expanded to a team of 7 people featuring:
  *  -Marko
  *  -Lucas
