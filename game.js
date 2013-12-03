@@ -3,11 +3,11 @@
  * who's there?
  * 100% pure swag.
  *
- *     .           .           .           .           .           .
- *    ...         ...         ...         ...         ...         ...
- *   .....       .....       .....       .....       .....       .....
- *    ...         ...         ...         ...         ...         ...
- *     .           .           .           .           .           .
+ *        .           .           .           .           .           .
+ *       ...         ...         ...         ...         ...         ...
+ *      .....       .....       .....       .....       .....       .....
+ *       ...         ...         ...         ...         ...         ...
+ *        .           .           .           .           .           .
  *
  *
  * -----------------------------  GILGORM AUTHORS ------------------------------
@@ -57,14 +57,14 @@ TileLayerProperties = Q.TileLayer.extend({
     //Get map zoom level, defaults to 1
     getSize: function()
     {
-        var parser = new DOMParser(),
+        var parser = new DOMParser(),                                         //Set up a new parser and load @level
             doc = parser.parseFromString(Q.asset(level), "application/xml");
 
-        var properties = doc.getElementsByTagName("property");
-        for(var i = 0; i < properties.length; i++)
-            if(properties[i].getAttribute("name") == "size")
-                return parseFloat(properties[i].getAttribute("value"));
-        return 1.0;
+        var properties = doc.getElementsByTagName("property");                //Get property tags (Remember this is XML)
+        for(var i = 0; i < properties.length; i++)                            //Loop through properties
+            if(properties[i].getAttribute("name") == "size")                  //If a property is called "size"
+                return parseFloat(properties[i].getAttribute("value"));       //Return the value stored as a float
+        return 1.0;    //Default to zoom 1
     },
 
     //Get starting player coordinates from level
@@ -252,34 +252,58 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
     var x, y;
     try
     {
-        var pos = world.getPlayerPos(new Q.TileLayer({ dataAsset: level, layerIndex:2,  sheet: 'tiles', tileW: 70, tileH: 70 }));
-        x = 41 / 2 + pos.x;
-        y = pos.y;
+        var pos = world.getPlayerPos(new Q.TileLayer({ //       This loads up the player layer from the level file
+            dataAsset: level,                          //   It uses the same info as the others, like
+            layerIndex:2,                              //   tile width/tile height. Only difference is that the layer
+            sheet: 'tiles',                            //   is set to '2', which is the 3rd layer, and also where the
+            tileW: 70,                                 //   player is stored.
+            tileH: 70                                  //
+        }));
+        x = 41 / 2 + pos.x;        //Add 41 / 2 due to the sprite being centered, and that the sprite is 41px
+        y = pos.y;                 //y position is however at the bottom as it should be
     } catch(err)
-    {
-        x = 110;
+    {                              //If the map fails to load the player's position,
+        x = 110;                   //This will load a hardcoded position at 110x, 50y
         y = 50;
     }
     var player = stage.insert(new Q.Player({
-        x: x,
+        x: x,                                //Load the player in with these values
         y: y
     }));
 
     stage.insert(new Q.Enemy({ x: 700, y: 0 }));  //Add a turdman in at coords 700x0
-    stageMaxX = midGround.p.w;
-    stageMaxY = midGround.p.h;
-    if(stageMaxX * scale < Q.width)
-    {
-        scale = Q.width / stageMaxX;
+
+    stageMaxX = midGround.p.w;               //Sets @stageMaxX according to the mid ground, which in
+    stageMaxY = midGround.p.h;               //the editor is the same size as the whole map
+
+
+    if(stageMaxX * scale < Q.width)          //If the stage with the scale multiplier
+    {                                        //is less than the screen width,
+        scale = Q.width / stageMaxX;         //this will resize the screen scale to fit the level
     }
-    if(stageMaxY * scale < Q.height)
+    if(stageMaxY * scale < Q.height)         //Just like above^ except this compares the height
     {
         scale = Q.height / stageMaxY;
     }
 
-    stage.add("viewport").follow(player,{x: true, y: true},{minX: 0, maxX: midGround.p.w * scale, minY: 0, maxY: midGround.p.h * scale});
-    stage.viewport.scale = scale;
+    stage.add("viewport").follow(player,      //Set the view to follow the player
+        {
+            x:true,                           //Follow both on the x axis
+            y: true                           //And the y axis
+        },{
+            minX: 0,                          //This section doesn't let the camera
+            maxX: midGround.p.w * scale,      //go beyond the bounds of the level
+            minY: 0,                          //This is calculated with the level size
+            maxY: midGround.p.h * scale       //multiplied by the scale modifier
+    });
+    stage.viewport.scale = scale;             //Set the stage's scale to the scale modifier
+
+    //     This is used for the pulsing effect,
+    // the pulse tries to conform to this scale
+    // every time it pulses
     targetScale = scale;
+
+
     stage.step = function(dt)
     {
         if(this.paused) { return false; }
