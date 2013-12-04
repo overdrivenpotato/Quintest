@@ -355,21 +355,11 @@ Q.scene("testUI", function(stage)
     }),container);
 
     container.fit(20,20);
+
+    stage.temp = stage.step;
     stage.step = function(dt)
     {
-        if(this.paused) { return false; }
-
-        this.trigger("prestep",dt);
-        this.updateSprites(this.items,dt);
-        this.trigger("step",dt);
-
-        if(this.removeList.length > 0) {
-            for(var i=0,len=this.removeList.length;i<len;i++) {
-                this.forceRemove(this.removeList[i]);
-            }
-            this.removeList.length = 0;
-        }
-
+        stage.temp(dt);
         if(document.hasFocus())
         {
             console.log("Unpausing with new scene...");
