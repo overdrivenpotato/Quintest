@@ -303,24 +303,10 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
     // every time it pulses
     targetScale = scale;
 
-
+    stage.temp = stage.step;
     stage.step = function(dt)
     {
-        if(this.paused) { return false; }
-
-        this.trigger("prestep",dt);
-        this.updateSprites(this.items,dt);
-        this.trigger("step",dt);
-
-        if(this.removeList.length > 0) {
-            for(var i=0,len=this.removeList.length;i<len;i++) {
-                this.forceRemove(this.removeList[i]);
-            }
-            this.removeList.length = 0;
-        }
-
-        this.trigger('poststep',dt);
-
+        stage.temp(dt);
         if(pump)
         {
             if(pumpRate < (getTime() - seconds))
