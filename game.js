@@ -303,32 +303,39 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
     // every time it pulses
     targetScale = scale;
 
-    stage.temp = stage.step;
-    stage.step = function(dt)
+    stage.temp = stage.step;      //Modifying the step function, so store the original in a temp
+    stage.step = function(dt)     //Start of modded function
     {
-        stage.temp(dt);
-        if(pump)
+        stage.temp(dt);           //Call original
+        if(pump)                  //If screen pumping is enabled
         {
-            if(pumpRate < (getTime() - seconds))
-            {
-                seconds = getTime();
+            if(pumpRate < (getTime() - seconds))    //   if the ms per pump is less than the difference
+            {                                       //   between the current time and the last recorded time
+                seconds = getTime();                //Re record the current time
             }
 
+            //Math to generate scale value, some complicated math is involved, will document later
             this.viewport.scale = targetScale * (((getTime() - seconds) / pumpRate) * 0.03 + 1);
             this.viewport.boundingBox.maxX = midGround.p.w * this.viewport.scale;
             this.viewport.boundingBox.maxY = midGround.p.h* this.viewport.scale;
         }
 
-        if(!document.hasFocus())
+        if(!document.hasFocus())                         //If page is in background
         {
             console.log("Not focused.");
-            this.pause();
+            this.pause();                                //Pause game
 //            Q.audio.pauseGame();
-            Q.stageScene("testUI", {prevStage: this});
+            Q.stageScene("testUI", {prevStage: this});   //Show testUI stage
         }
     }
 });
 
+/* This defines the scene "testUI".
+ *
+ *      This stage is a placeholder for the pause menu. There is currently
+ *  nothing here except a message saying "Pause menu swag" and a method checking
+ *  if the window is back in focus.
+ */
 Q.scene("testUI", function(stage)
 {
     var container = stage.insert(new Q.UI.Container({
