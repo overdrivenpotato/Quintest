@@ -338,8 +338,8 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
  */
 Q.scene("testUI", function(stage)
 {
-    var container = stage.insert(new Q.UI.Container({
-        fill: "gray",
+    var container = stage.insert(new Q.UI.Container({  //Create a new container for the text
+        fill: "gray",                                  //
         border: 5,
         shadow: 10,
         shadowColor: "rgba(0,0,0,0.5)",
@@ -368,15 +368,19 @@ Q.scene("testUI", function(stage)
     }
 });
 
+/*        This is where the game actually starts. The necessary assets are
+ *   loaded and the game is started via the callback function. This function
+ *   set everything up and loads the stage after the game is ready.
+ */
 Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, " + level, function() {
-    Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});
-    Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});
-    Q.load("industryloop.mp3", function(){
+    Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});   //Load tile map as 'tiles'
+    Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});    //Load player sheet as 'player'
+    Q.load("industryloop.mp3", function(){                       //Load the song
         console.log("Loaded?");
-        Q.audio.play("industryloop.mp3", {loop: true});
-        seconds = getTime();
+        Q.audio.play("industryloop.mp3", {loop: true});          //Play song as loop
+        seconds = getTime();                                     //Get current time to start pump fx
     });
-    var loadtext = document.getElementById("loading");
-    loadtext.parentNode.removeChild(loadtext);
-    Q.stageScene("level2");
+    var loadtext = document.getElementById("loading");           //Get loading text from page
+    loadtext.parentNode.removeChild(loadtext);                   //Remove it
+    Q.stageScene("level2");                                      //Load scene "level2"
 });
