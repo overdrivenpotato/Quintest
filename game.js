@@ -160,7 +160,6 @@ Q.Sprite.extend("Enemy",{
                 collision.obj.p.vy = -300;            //This sets the player's y velocity to -300
             }
         });
-
     }
 });
 
