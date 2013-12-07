@@ -323,7 +323,8 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
         {
             console.log("Not focused.");
             this.pause();                                //Pause game
-//            Q.audio.pauseGame();
+//            Q.audio.pauseGame();                       //Perhaps this could be written?
+            Q.audio.stop();                              //Crude stopping of sound.
             Q.stageScene("testUI", {prevStage: this});   //Show testUI stage
         }
     }
@@ -361,8 +362,9 @@ Q.scene("testUI", function(stage)
         stage.temp(dt);
         if(document.hasFocus())
         {
-            console.log("Unpausing with new scene...");
+            console.log("Unpausing with new scene and audio...");
             Q.stageScene("level2");
+            Q.audio.play("industryloop.mp3", {loop: true}); //restarts audio
         }
     }
 });
