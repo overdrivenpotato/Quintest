@@ -134,6 +134,8 @@ Q.Sprite.extend("Player",{
         {                              //   is 70px tall and 35 is half of 70.
             Q.clearStages();           //Remove stages (duh)
             Q.stageScene("level2");    //Reload same level
+            Q.audio.play("death.mp3",  //Play death sound
+                {loop:false});
         }
 
         if(this.p.vy > 1200)           //If player velocity is greater than 1200
@@ -151,6 +153,7 @@ Q.Sprite.extend("Enemy",{
             if(collision.obj.isA("Player")) {                               //If player
                 Q.clearStages();                                            //Reset game
                 Q.stageScene("level2");                                     //Load same level
+                Q.audio.play("death.mp3", {loop: false});                   //Play death sound
             }
         });
 
@@ -374,7 +377,7 @@ Q.scene("testUI", function(stage)
  *   loaded and the game is started via the callback function. This function
  *   set everything up and loads the stage after the game is ready.
  */
-Q.load("tiles_map.png, gilgorm.png, turdman.png, pipe.png, clouds3.png, " + level, function() {
+Q.load("tiles_map.png, death.mp3, gilgorm.png, turdman.png, pipe.png, clouds3.png, " + level, function() {
     Q.sheet("tiles","tiles_map.png", { tilew: 70, tileh: 70});   //Load tile map as 'tiles'
     Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});    //Load player sheet as 'player'
     Q.load("industryloop.mp3", function(){                       //Load the song
