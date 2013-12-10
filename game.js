@@ -365,6 +365,7 @@ Q.scene("testUI", function(stage)
             console.log("Unpausing with new scene and audio...");
             Q.stageScene("level2");
             Q.audio.play("industryloop.mp3", {loop: true}); //restarts audio
+            seconds = getTime();                            //also restart pulsating
         }
     }
 });
