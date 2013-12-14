@@ -47,7 +47,7 @@ var Q = window.Q = Quintus({ audioSupported: ['mp3'], development: true})
         maximize: "touch"    //Disregard screenX and screenY if on mobile browser
     }).controls().touch().enableSound(); //Enable needed modules
 
-var level = "level7.tmx"; //Very temporary placeholder for current level
+var level = "level8.tmx"; //Very temporary placeholder for current level
 
 /* TileLayerProperties
  * Wrote this class to help with loading meta data from the map
