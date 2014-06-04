@@ -47,7 +47,7 @@ var Q = window.Q = Quintus({ audioSupported: ['mp3'], development: true})
         maximize: "touch"    //Disregard screenX and screenY if on mobile browser
     }).controls().touch().enableSound(); //Enable needed modules
 
-var level = "level8.tmx"; //Very temporary placeholder for current level
+var level = "Level2.tmx"; //Very temporary placeholder for current level
 
 /* TileLayerProperties
  * Wrote this class to help with loading meta data from the map
@@ -134,8 +134,8 @@ Q.Sprite.extend("Player",{
         {                              //   is 70px tall and 35 is half of 70.
             Q.clearStages();           //Remove stages (duh)
             Q.stageScene("level2");    //Reload same level
-            Q.audio.play("death.mp3",  //Play death sound
-                {loop:false});
+            //Q.audio.play("death.mp3",  //Play death sound
+//                {loop:false});
         }
 
         if(this.p.vy > 1200)           //If player velocity is greater than 1200
@@ -207,7 +207,7 @@ Q.Sprite.extend("Enemy",{
 var pumpRate = 240000.0 / 110.0;   //Explained above ^
 var seconds = getTime();           //@seconds acts as a counter keeping the last recorded time
 var targetScale;                   //Used in the pump equation to continually pulse towards this scale value
-var pump = !Q.touchDevice;         //Only pump if not on a mobile device, otherwise it'll look pretty strange
+var pump = false;
 
 //This function gets the current CMOS time in ms
 function getTime()
@@ -273,7 +273,7 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
         y: y
     }));
 
-    stage.insert(new Q.Enemy({ x: 700, y: 0 }));  //Add a turdman in at coords 700x0
+    //stage.insert(new Q.Enemy({ x: 700, y: 0 }));  //Add a turdman in at coords 700x0
 
     stageMaxX = midGround.p.w;               //Sets @stageMaxX according to the mid ground, which in
     stageMaxY = midGround.p.h;               //the editor is the same size as the whole map
@@ -325,10 +325,10 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
         if(!document.hasFocus())                         //If page is in background
         {
             console.log("Not focused.");
-            this.pause();                                //Pause game
+//            this.pause();                                //Pause game
 //            Q.audio.pauseGame();                       //Perhaps this could be written?
-            Q.audio.stop();                              //Crude stopping of sound.
-            Q.stageScene("testUI", {prevStage: this});   //Show testUI stage
+//            Q.audio.stop();                              //Crude stopping of sound.
+            //Q.stageScene("testUI", {prevStage: this});   //Show testUI stage
         }
     }
 });
@@ -365,9 +365,9 @@ Q.scene("testUI", function(stage)
         stage.temp(dt);
         if(document.hasFocus())
         {
-            console.log("Unpausing with new scene and audio...");
-            Q.stageScene("level2");
-            Q.audio.play("industryloop.mp3", {loop: true}); //restarts audio
+            //console.log("Unpausing with new scene and audio...");
+            //Q.stageScene("level2");
+            //Q.audio.play("industryloop.mp3", {loop: true}); //restarts audio
             seconds = getTime();                            //also restart pulsating
         }
     }
@@ -382,7 +382,7 @@ Q.load("tiles_map.png, death.mp3, gilgorm.png, turdman.png, pipe.png, clouds3.pn
     Q.sheet("player","gilgorm.png", { tilew: 41, tileh: 67});    //Load player sheet as 'player'
     Q.load("industryloop.mp3", function(){                       //Load the song
         console.log("Loaded?");
-        Q.audio.play("industryloop.mp3", {loop: true});          //Play song as loop
+        //Q.audio.play("industryloop.mp3", {loop: true});          //Play song as loop
         seconds = getTime();                                     //Get current time to start pump fx
     });
     var loadtext = document.getElementById("loading");           //Get loading text from page
