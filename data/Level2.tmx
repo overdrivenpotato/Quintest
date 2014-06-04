@@ -410,9 +410,9 @@
  <layer name="Collision" width="40" height="10">
   <data>
    <tile gid="6"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="6"/>
+   <tile gid="6"/>
+   <tile gid="6"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -450,9 +450,9 @@
    <tile gid="0"/>
    <tile gid="2"/>
    <tile gid="6"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="6"/>
+   <tile gid="6"/>
+   <tile gid="6"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -490,9 +490,9 @@
    <tile gid="0"/>
    <tile gid="2"/>
    <tile gid="6"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="6"/>
+   <tile gid="6"/>
+   <tile gid="6"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -530,9 +530,9 @@
    <tile gid="0"/>
    <tile gid="2"/>
    <tile gid="6"/>
-   <tile gid="7"/>
-   <tile gid="7"/>
-   <tile gid="7"/>
+   <tile gid="6"/>
+   <tile gid="6"/>
+   <tile gid="6"/>
    <tile gid="7"/>
    <tile gid="7"/>
    <tile gid="7"/>
@@ -650,7 +650,7 @@
    <tile gid="8"/>
    <tile gid="2"/>
    <tile gid="6"/>
-   <tile gid="6"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -812,7 +812,7 @@
   </data>
  </layer>
  <objectgroup name="data" width="40" height="10">
-  <object name="pipeLevel2" type="pipe" x="140" y="140" width="70" height="70">
+  <object name="pipeLevel2" type="pipe" x="280" y="140" width="70" height="70">
    <properties>
     <property name="select" value="level3.tmx"/>
    </properties>
