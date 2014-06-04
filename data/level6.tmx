@@ -1504,7 +1504,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="4"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2725,5 +2725,6 @@
    </properties>
   </object>
   <object x="3640" y="630"/>
+  <object x="3850" y="-210"/>
  </objectgroup>
 </map>
