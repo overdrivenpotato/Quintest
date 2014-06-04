@@ -49,6 +49,31 @@ var Q = window.Q = Quintus({ audioSupported: ['mp3'], development: true})
 
 var level = "Level2.tmx"; //Very temporary placeholder for current level
 
+var pipeloc = {x: 0, y: 0};
+var pipefuture = "level7.tmx";
+//Unused Pipe object for now, it used to be useful, is now not useable
+Q.Sprite.extend("Pipe",{
+    init: function(p){
+        this._super(p, {asset: "pipe.png", x: pipeloc.x, y: pipeloc.y});
+        this.add("2d");
+//        this.on("hit.sprite", function(collision)
+//        {
+//            if(collision.obj.isA("Pipe") && collision.obj.x == this.x - 70 && Q.inputs['down'])
+//            {
+//                Q.clearStages();
+//                Q.stageScene("level2");
+//            }
+//        });
+//        this._super(p, { asset: 'pipe.png', x: 3045, y: 280}) ;
+        this.on("bump.top", function(collision) {
+            if(collision.obj.isA("Player") && Q.inputs['down']) {
+                level = pipefuture;
+                Q.clearStages();
+                Q.stageScene("level2");
+            }
+        });
+    }
+});
 /* TileLayerProperties
  * Wrote this class to help with loading meta data from the map
  * This will be replaced when we write our own level editor
@@ -62,8 +87,12 @@ TileLayerProperties = Q.TileLayer.extend({
 
         var properties = doc.getElementsByTagName("property");                //Get property tags (Remember this is XML)
         for(var i = 0; i < properties.length; i++)                            //Loop through properties
-            if(properties[i].getAttribute("name") == "size")                  //If a property is called "size"
+        {
+            if (properties[i].getAttribute("name") == "size")                  //If a property is called "size"
                 return parseFloat(properties[i].getAttribute("value"));       //Return the value stored as a float
+        }
+
+
         return 1.0;    //Default to zoom 1
     },
 
@@ -166,28 +195,7 @@ Q.Sprite.extend("Enemy",{
     }
 });
 
-//Unused Pipe object for now, it used to be useful, is now not useable
-//Q.Sprite.extend("Pipe",{
-//    init: function(p){
-//        this._super(p, {asset: "pipe.png", x: 3045, y: 280});
-//        this.add("2d");
-////        this.on("hit.sprite", function(collision)
-////        {
-////            if(collision.obj.isA("Pipe") && collision.obj.x == this.x - 70 && Q.inputs['down'])
-////            {
-////                Q.clearStages();
-////                Q.stageScene("level2");
-////            }
-////        });
-////        this._super(p, { asset: 'pipe.png', x: 3045, y: 280}) ;
-//        this.on("bump.top", function(collision) {
-//            if(collision.obj.isA("Player") && Q.inputs['down']) {
-//                Q.clearStages();
-//                Q.stageScene("level2");
-//            }
-//        });
-//    }
-//});
+
 
 
 /* @pumpRate is the amount of milliseconds between pulses
@@ -223,6 +231,7 @@ function getTime()
  */
 Q.scene("level2", function(stage) {    //Stage is passed to this function as the object to use in loading.
 
+    setuphooks();
     var background = new Q.Repeater({  //Background is the background pic to the stage
         asset: "clouds3.png",          //Use clouds3.png as the background (grey starry background)
         speedX: 0.5,                   //Set horizontal movement to half of main stage movement
@@ -273,6 +282,12 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
         y: y
     }));
 
+    console.log("loading pipe at ");
+    console.log(pipeloc);
+    stage.insert(new Q.Pipe({
+        x: pipeloc.x,
+        y: pipeloc.y
+    }));
     //stage.insert(new Q.Enemy({ x: 700, y: 0 }));  //Add a turdman in at coords 700x0
 
     stageMaxX = midGround.p.w;               //Sets @stageMaxX according to the mid ground, which in
@@ -324,7 +339,7 @@ Q.scene("level2", function(stage) {    //Stage is passed to this function as the
 
         if(!document.hasFocus())                         //If page is in background
         {
-            console.log("Not focused.");
+//            console.log("Not focused.");
 //            this.pause();                                //Pause game
 //            Q.audio.pauseGame();                       //Perhaps this could be written?
 //            Q.audio.stop();                              //Crude stopping of sound.
@@ -389,3 +404,45 @@ Q.load("tiles_map.png, death.mp3, gilgorm.png, turdman.png, pipe.png, clouds3.pn
     loadtext.parentNode.removeChild(loadtext);                   //Remove it
     Q.stageScene("level2");                                      //Load scene "level2"
 });
+
+function setuphooks() {
+    var parser = new DOMParser(),                                         //Set up a new parser and load @level
+        doc = parser.parseFromString(Q.asset(level), "application/xml");
+    console.log("getting super");
+    console.log(doc);
+        var objectgroups = doc.getElementsByTagName("objectgroup");
+    console.log(objectgroups);
+        var temp = function() {
+            console.log("calling temp");
+            console.log(objectgroups);
+            for (var i = 0; i < objectgroups.length; i++) {
+                if (objectgroups[i].getAttribute("name").toLowerCase() == "data") {
+                    console.log("it is data");
+                    var objects = objectgroups[i].getElementsByTagName("object");
+                    for (var j = 0; j < objects.length; j++) {
+                        var object = objects[j];
+                        var properties = object.getElementsByTagName("properties");
+                        for (var k = 0; k < properties.length; k++) {
+                            var property = properties[k].getElementsByTagName("property")[0];
+                            console.log(property);
+                            if(property.getAttribute("name").toLowerCase() == "select") {
+                                console.log("selectin");
+                                if (object.getAttribute("type").toLowerCase() == "pipe") {
+                                    console.log("pipe found");
+                                    pipeloc.x = Number(object.getAttribute("x")) + 35;
+                                    pipeloc.y = Number(object.getAttribute("y"));
+                                    pipefuture = property.getAttribute("value");
+                                    console.log("Loaded future at " + pipefuture);
+                                    Q.load(pipefuture, function() {
+                                        console.log("loaded" + pipefuture);
+                                    });
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        temp();
+}

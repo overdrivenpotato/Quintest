@@ -2718,7 +2718,7 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Object Layer 1" width="60" height="15">
+ <objectgroup name="data" width="60" height="15">
   <object name="pipeLevel6" type="pipe" x="3640" y="630" width="70" height="70">
    <properties>
     <property name="select" value="level7.tmx"/>
