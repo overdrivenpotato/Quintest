@@ -1504,7 +1504,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="4"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2718,12 +2718,13 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Object Layer 1" width="60" height="15">
+ <objectgroup name="data" width="60" height="15">
   <object name="pipeLevel6" type="pipe" x="3640" y="630" width="70" height="70">
    <properties>
     <property name="select" value="level7.tmx"/>
    </properties>
   </object>
   <object x="3640" y="630"/>
+  <object x="3850" y="-210"/>
  </objectgroup>
 </map>
