@@ -18021,4 +18021,12 @@
    <tile gid="0"/>
   </data>
  </layer>
+ <objectgroup name="data" width="200" height="30">
+  <object name="pipeLevel7" type="pipe" x="13930" y="350" width="70" height="70">
+   <properties>
+    <property name="select" value="level8.tmx"/>
+   </properties>
+  </object>
+  <object x="13930" y="350"/>
+ </objectgroup>
 </map>

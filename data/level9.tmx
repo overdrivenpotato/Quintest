@@ -7521,4 +7521,11 @@
    <tile gid="0"/>
   </data>
  </layer>
+ <objectgroup name="data" width="125" height="20">
+  <object name="pipeLevel9" type="pipe" x="8400" y="1260" width="70" height="70">
+   <properties>
+    <property name="select" value="level10.tmx"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

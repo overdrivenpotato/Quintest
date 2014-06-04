@@ -1880,9 +1880,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="11"/>
-   <tile gid="12"/>
-   <tile gid="13"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1901,9 +1898,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="11"/>
-   <tile gid="12"/>
-   <tile gid="13"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1940,9 +1934,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="21"/>
-   <tile gid="22"/>
-   <tile gid="23"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -1961,9 +1952,18 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="21"/>
-   <tile gid="22"/>
-   <tile gid="23"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -2718,4 +2718,12 @@
    <tile gid="0"/>
   </data>
  </layer>
+ <objectgroup name="Object Layer 1" width="60" height="15">
+  <object name="pipeLevel6" type="pipe" x="3640" y="630" width="70" height="70">
+   <properties>
+    <property name="select" value="level7.tmx"/>
+   </properties>
+  </object>
+  <object x="3640" y="630"/>
+ </objectgroup>
 </map>
